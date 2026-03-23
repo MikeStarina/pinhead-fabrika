@@ -19,7 +19,6 @@ jobs:
         with:
           accessKeyId: ${{ secrets.YC_ACCESS_KEY_ID }}
           secretAccessKey: ${{ secrets.YC_SECRET_ACCESS_KEY }}
-          #yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
           bucketName: ${{ secrets.YC_BUCKET_NAME }}
           source: "./"
           sourceDir: ./
@@ -41,3 +40,5 @@ jobs:
             README.md
             LICENSE
           public-read: true
+
+          
