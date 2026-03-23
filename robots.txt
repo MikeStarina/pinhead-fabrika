@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /zayavka.html
+
+Sitemap: https://fabric-pnhd-admin.ru/sitemap.xml
