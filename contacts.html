@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Контакты — ПИНХЭД ФАБРИКА, Санкт-Петербург</title>
+  <meta name="description" content="Контакты трикотажной фабрики Пинхэд в Санкт-Петербурге. Телефон, email, Telegram. Приезжайте на производство — покажем изнутри." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0A0A0A; --white: #FFFFFF; --blue: #1D19EA;
+      --blue-light: #EEEEFF; --gray: #F5F5F5; --gray-mid: #E8E8E8;
+      --text: #222; --text-muted: #888; --radius: 16px; --radius-lg: 24px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'IBM Plex Sans', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-mid);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 64px;
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links li a {
+      text-decoration: none; color: var(--text);
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 8px 14px; border-radius: 8px; transition: background 0.15s;
+    }
+    .nav-links li a:hover { background: var(--gray); }
+    .nav-links li a.active { color: var(--blue); }
+    .nav-cta { background: var(--blue) !important; color: var(--white) !important; border-radius: 8px !important; }
+    .nav-cta:hover { background: var(--black) !important; }
+    .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 8px; cursor: pointer; }
+    .burger span { display: block; width: 24px; height: 2px; background: var(--black); border-radius: 2px; }
+    .mobile-nav {
+      display: none; flex-direction: column; position: absolute;
+      top: 64px; left: 0; right: 0; background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-mid); padding: 12px 20px;
+    }
+    .mobile-nav a {
+      text-decoration: none; color: var(--text); font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 14px 0; border-bottom: 1px solid var(--gray-mid); display: block;
+    }
+    .mobile-nav a:last-child { border-bottom: none; }
+    .mobile-nav.open { display: flex; }
+
+    /* HERO */
+    .page-hero {
+      margin-top: 64px; background: var(--black);
+      padding: 72px 40px 64px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .breadcrumb { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.3); margin-bottom: 24px; }
+    .breadcrumb a { color: rgba(255,255,255,0.3); text-decoration: none; }
+    h1.page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 8vw, 120px); line-height: 0.9; color: var(--white); }
+    h1.page-title .accent { color: var(--blue); }
+    .hero-status { display: flex; align-items: center; gap: 10px; margin-top: 28px; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .status-text { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); }
+    .hero-contacts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .hero-contact-card { background: rgba(255,255,255,0.06); border-radius: var(--radius); padding: 24px; }
+    .hero-contact-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); margin-bottom: 10px; }
+    .hero-contact-value { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--white); text-decoration: none; transition: color 0.15s; display: block; }
+    .hero-contact-value:hover { color: var(--blue); }
+    .hero-lead { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.55); margin-bottom: 28px; }
+
+    /* SECTIONS */
+    .section { padding: 72px 40px; max-width: 1400px; margin: 0 auto; }
+    .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 16px; }
+    h2.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 4vw, 64px); line-height: 1; margin-bottom: 40px; }
+    h2.section-title .accent { color: var(--blue); }
+
+    /* CHANNELS */
+    .channels-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .channel-card {
+      background: var(--gray); border-radius: var(--radius); padding: 28px 24px;
+      text-decoration: none; color: var(--text);
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: background 0.2s, transform 0.2s; min-height: 180px;
+    }
+    .channel-card:hover { background: var(--black); transform: translateY(-3px); }
+    .channel-card:hover .channel-type { color: rgba(255,255,255,0.4); }
+    .channel-card:hover .channel-value { color: var(--white); }
+    .channel-card:hover .channel-desc { color: rgba(255,255,255,0.4); }
+    .channel-card:hover .channel-arrow { color: var(--blue); }
+    .channel-icon { font-size: 28px; margin-bottom: 12px; }
+    .channel-type { font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 6px; transition: color 0.2s; }
+    .channel-value { font-family: 'Bebas Neue', sans-serif; font-size: 20px; margin-bottom: 8px; transition: color 0.2s; }
+    .channel-desc { font-size: 12px; line-height: 1.55; color: #777; transition: color 0.2s; }
+    .channel-arrow { font-size: 18px; color: var(--blue); margin-top: 16px; transition: color 0.2s, transform 0.15s; display: block; }
+    .channel-card:hover .channel-arrow { transform: translate(3px, -3px); }
+
+    /* MAP + FORM */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .map-card { background: var(--gray); border-radius: var(--radius); overflow: hidden; }
+    .map-visual {
+      height: 280px; background: var(--gray-mid); position: relative; overflow: hidden;
+    }
+    .map-grid-lines {
+      position: absolute; inset: 0; opacity: 0.12;
+    }
+    .map-pin {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 2;
+    }
+    .map-pin-dot {
+      width: 18px; height: 18px; background: var(--blue); border-radius: 50%;
+      border: 3px solid var(--white); box-shadow: 0 2px 12px rgba(29,25,234,0.4);
+      animation: pin-pulse 2s ease-in-out infinite;
+    }
+    @keyframes pin-pulse {
+      0%, 100% { box-shadow: 0 2px 12px rgba(29,25,234,0.4); }
+      50% { box-shadow: 0 2px 24px rgba(29,25,234,0.7); }
+    }
+    .map-pin-label {
+      background: var(--black); color: var(--white);
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      padding: 5px 10px; border-radius: 6px; white-space: nowrap;
+    }
+    .map-info { padding: 24px 28px; }
+    .map-info-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 12px; }
+    .map-address { font-size: 15px; line-height: 1.7; margin-bottom: 16px; }
+    .map-address strong { font-weight: 600; }
+    .map-metro { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text-muted); }
+    .map-open-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      background: var(--black); color: var(--white);
+      padding: 10px 18px; border-radius: 8px; text-decoration: none;
+      transition: background 0.15s;
+    }
+    .map-open-btn:hover { background: var(--blue); }
+
+    /* FORM */
+    .form-card { background: var(--gray); border-radius: var(--radius); padding: 36px 32px; }
+    .form-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; margin-bottom: 4px; }
+    .form-subtitle { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); margin-bottom: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+    .form-field input, .form-field select, .form-field textarea {
+      border: 1.5px solid var(--gray-mid); border-radius: 10px;
+      padding: 12px 14px; font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 14px; color: var(--text); background: var(--white);
+      outline: none; transition: border-color 0.15s;
+    }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--blue); }
+    .form-field textarea { resize: vertical; line-height: 1.6; }
+    .form-submit {
+      width: 100%; background: var(--blue); color: var(--white); border: none; cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 16px; border-radius: 10px; margin-top: 12px;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .form-submit:hover { background: var(--black); transform: translateY(-1px); }
+
+    /* VISIT */
+    .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .visit-left {
+      background: var(--black); border-radius: var(--radius); padding: 48px 40px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .visit-left h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 4vw, 56px); color: var(--white); line-height: 1; margin-bottom: 20px; }
+    .visit-left p { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.5); margin-bottom: 32px; }
+    .btn-visit {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      background: var(--white); color: var(--black);
+      padding: 14px 24px; border-radius: 10px; text-decoration: none;
+      width: fit-content; transition: background 0.15s;
+    }
+    .btn-visit:hover { background: var(--blue); color: var(--white); }
+    .visit-steps { background: var(--gray); border-radius: var(--radius); padding: 40px; display: flex; flex-direction: column; gap: 0; }
+    .visit-step { display: flex; gap: 20px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid var(--gray-mid); }
+    .visit-step:last-child { border-bottom: none; }
+    .visit-step-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--blue); line-height: 1; min-width: 36px; }
+    .visit-step-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; margin-bottom: 6px; }
+    .visit-step-desc { font-size: 13px; line-height: 1.6; color: #666; }
+
+    /* HOURS */
+    .hours-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .hours-card { background: var(--gray); border-radius: var(--radius); padding: 28px 24px; }
+    .hours-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 10px; }
+    .hours-value { font-family: 'Bebas Neue', sans-serif; font-size: 36px; line-height: 1; margin-bottom: 10px; }
+    .hours-note { font-size: 13px; line-height: 1.6; color: #666; }
+
+    /* CTA */
+    .cta-band {
+      background: var(--black); border-radius: var(--radius-lg);
+      padding: 64px 56px; margin: 0 40px 80px;
+      display: flex; justify-content: space-between; align-items: center; gap: 40px;
+    }
+    .cta-band h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 4vw, 64px); color: var(--white); line-height: 1; }
+    .cta-band h2 .accent { color: var(--blue); }
+    .cta-band p { color: rgba(255,255,255,0.5); font-size: 15px; margin-top: 8px; }
+    .btn-white {
+      background: var(--white); color: var(--black);
+      font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 18px 36px; text-decoration: none; border-radius: 10px;
+      white-space: nowrap; transition: background 0.15s, transform 0.1s;
+    }
+    .btn-white:hover { background: var(--blue); color: var(--white); transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer {
+      background: var(--black); color: var(--white);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 40px; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    footer span { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.3); }
+
+    .fade-up { transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.will-animate { opacity: 0; transform: translateY(24px); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1024px) {
+      .page-hero { grid-template-columns: 1fr; gap: 40px; padding: 56px 32px 48px; }
+      .channels-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .visit-grid { grid-template-columns: 1fr; }
+      .hours-grid { grid-template-columns: 1fr 1fr; }
+      .cta-band { flex-direction: column; text-align: center; margin: 0 32px 60px; padding: 48px 40px; }
+      .section { padding: 56px 32px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .burger { display: flex; }
+      .page-hero { padding: 40px 20px 32px; }
+      .hero-contacts { grid-template-columns: 1fr; }
+      .section { padding: 48px 20px; }
+      .channels-grid { grid-template-columns: 1fr 1fr; }
+      .hours-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .visit-left { padding: 36px 28px; }
+      .visit-steps { padding: 28px 24px; }
+      .cta-band { margin: 0 20px 48px; padding: 36px 24px; }
+      footer { padding: 28px 20px; border-radius: 12px 12px 0 0; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="160" height="21" viewBox="0 0 1275 166" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M627.535 57.8959L654.235 28.1662L668.387 39.6703L643.556 67.3257L694.631 54.6644L696.685 73.5178L638.96 87.8287L675.722 117.848L661.576 133.543L620.909 100.342L610.792 165.243H591.039L598.472 117.521L575.64 142.936L561.488 131.432L589.675 100.053L524.332 116.229L522.277 97.3754L595.166 79.3037L542.302 36.1557L556.448 20.4476L607.152 61.8476L616.801 0H636.567L627.541 57.8959H627.529H627.535Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M482.025 115.816H494.19V163.051H465.769V144.666H428.693V163.051H400.271V115.816H412.437V20.0781H482.012V115.816H482.025ZM442.03 115.816H452.431V47.9551H442.03V115.816Z" fill="black"/><path d="M71.5558 145.023H40.8397V40.0949H29.8031V145.023H0.203581L0 20.0781H71.5558V145.023Z" fill="black"/><path d="M110.13 73.7023L121.309 20.0781H152.055V145.023H122.653V98.9264L109.451 145.023H80.5059V20.0781H110.136V73.7023H110.13Z" fill="black"/><path d="M190.811 66.79H201.866V20.0781H232.558V145.023H201.866V85.508H190.811V145.023H161.002V20.0781H190.811V66.79Z" fill="black"/><path d="M281.664 52.473L289.961 20.0781H319.141L298.567 80.4546L323.12 145.023H289.301L278.746 111.12L268.838 145.023H238.146L262.163 78.9466L238.794 20.0781H271.207L281.651 52.473H281.664Z" fill="black"/><path d="M358.421 20.0785C382.592 20.0785 394.683 28.7451 394.683 46.0843V119.017C394.683 136.35 382.598 145.023 358.421 145.023C334.244 145.023 323.121 136.714 323.121 120.082V94.969H353.14V121.049C353.14 124.083 355.62 126.545 358.698 126.545C361.777 126.545 364.257 124.077 364.257 121.049V99.0499H364.226V90.4695H353.597V74.626H364.22V66.0456H364.263V44.0469C364.263 41.0124 361.771 38.5503 358.705 38.5503C355.639 38.5503 353.146 41.0185 353.146 44.0469V70.1142H323.127V45.001C323.127 28.3819 334.892 20.0601 358.427 20.0601V20.0724L358.421 20.0785Z" fill="black"/><path d="M787.604 41.5908C799.956 41.6971 808.981 45.7847 814.553 53.9385C820.146 62.1237 822.938 71.9333 822.938 83.3418C822.937 95.89 819.803 106.047 813.5 113.76C807.267 121.386 798.617 125.235 787.604 125.347V144.999H759.532V125.353C748.069 125.255 739.371 121.75 733.532 114.76C727.624 107.686 724.711 97.1289 724.711 83.1758C724.711 69.2235 727.623 58.814 733.535 51.8887C739.377 45.046 748.075 41.6905 759.532 41.5967V21H787.604V41.5908ZM787.604 106.779C792.114 106.737 795.468 104.833 797.729 101.042C800.04 97.1677 801.228 91.2921 801.228 83.3477C801.228 77.1269 799.94 71.6958 797.375 67.0332C794.929 62.5863 791.676 60.3465 787.604 60.1797V106.779ZM759.532 60.167C755.371 60.2714 752.121 62.3945 749.76 66.6436C747.317 71.0404 746.085 76.5957 746.085 83.3477C746.085 91.2916 747.286 97.1664 749.624 101.04C751.854 104.734 755.136 106.64 759.532 106.773V60.167Z" fill="black"/><path d="M898.541 145.413H871.471L866.856 112.101H854.734L850.07 145.413H823L843.432 21.3237H878.072L898.541 145.413ZM864.66 94.8785L860.73 57.8426L857.01 94.8785H864.66Z" fill="black"/><path d="M907.346 145.023V20.9341H957.908V36.8576H933.972V66.7104C947.556 66.7104 956.909 68.0091 962.029 70.6066C967.143 73.2041 969.703 79.2301 969.703 88.6906V123.043C969.703 130.14 967.581 135.575 963.331 139.354C959.08 143.133 950.308 145.023 937.007 145.023H907.346ZM943.077 120.71V90.9435C943.077 86.6163 940.363 84.4559 934.934 84.4559H933.972V127.29C940.042 127.345 943.077 125.154 943.077 120.716V120.71Z" fill="black"/><path d="M1003.26 99.333V145.023H976.637V20.9341H1005.34C1016.73 20.9341 1025.19 22.3744 1030.71 25.2612C1036.23 28.148 1038.99 34.0324 1038.99 42.9143V77.3527C1038.99 85.4838 1036.74 91.2389 1032.23 94.6181C1027.72 97.9912 1018.06 99.5669 1003.26 99.333H1003.26ZM1012.37 75.0199V45.2533C1012.37 40.8708 1009.33 38.6796 1003.26 38.6796V81.5998C1009.33 81.5998 1012.37 79.4086 1012.37 75.0261V75.0199Z" fill="black"/><path d="M1049.16 144.745V20.6558H1071.97V77.2468L1089.25 20.6558H1118.63V144.745H1095.82V78.6317L1077.24 144.745H1049.16Z" fill="black"/><path d="M1198.16 145.023H1169.05L1153.92 96.0768V145.023H1128.34V20.934H1153.92V64.1805L1163.27 33.226C1165.93 24.4609 1171.68 20.0723 1180.54 20.0723C1186.04 20.0723 1190.18 20.417 1192.96 21.1125V37.6392C1188.27 37.6392 1185.03 40.5814 1183.24 46.4658L1174.13 76.0601L1198.16 145.023Z" fill="black"/><path d="M1275 145.023H1247.93L1243.32 111.711H1231.19L1226.53 145.023H1199.46L1219.89 20.9341H1254.53L1275 145.023ZM1241.12 94.4889L1237.19 57.4529L1233.47 94.4889H1241.12Z" fill="black"/></svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="kontraktnoe-proizvodstvo.html">Производство</a></li>
+    <li><a href="catalog.html">Каталог</a></li>
+    <li><a href="about.html">О фабрике</a></li>
+    <li><a href="contacts.html" class="active">Контакты</a></li>
+    <li><a href="zayavka.html" class="nav-cta">Заявка</a></li>
+  </ul>
+  <button class="burger" id="burger"><span></span><span></span><span></span></button>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="kontraktnoe-proizvodstvo.html">Производство</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="about.html">О фабрике</a>
+    <a href="contacts.html">Контакты</a>
+    <a href="zayavka.html">Заявка →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div>
+    <div class="breadcrumb"><a href="index.html">Главная</a> &nbsp;/&nbsp; Контакты</div>
+    <h1 class="page-title">КОН<span class="accent">✳</span><br>ТАКТЫ</h1>
+    <div class="hero-status">
+      <div class="status-dot"></div>
+      <span class="status-text">Отвечаем в течение 2 часов</span>
+    </div>
+  </div>
+  <div>
+    <p class="hero-lead">Готовы обсудить ваш проект. Позвоните, напишите или приезжайте на фабрику — покажем производство изнутри.</p>
+    <div class="hero-contacts">
+      <div class="hero-contact-card">
+        <div class="hero-contact-label">Телефон</div>
+        <a href="tel:+78120000000" class="hero-contact-value">+7 (812) 000-00-00</a>
+      </div>
+      <div class="hero-contact-card">
+        <div class="hero-contact-label">Email</div>
+        fabrika&#64;pnhd.ru
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHANNELS -->
+<section class="section fade-up">
+  <div class="section-label">Как связаться</div>
+  <h2 class="section-title">ВЫБЕРИТЕ <span class="accent">КАНАЛ</span></h2>
+  <div class="channels-grid">
+    <a href="tel:+78120000000" class="channel-card">
+      <div>
+        <div class="channel-icon">📞</div>
+        <div class="channel-type">Телефон</div>
+        <div class="channel-value">+7 (812) 000-00-00</div>
+        <p class="channel-desc">Пн–Пт, 9:00–18:00. Ответим сразу.</p>
+      </div>
+      <span class="channel-arrow">↗</span>
+    </a>
+    fabrika&#64;pnhd.ru
+    <a href="https://t.me/pinhead_fabrika" class="channel-card">
+      <div>
+        <div class="channel-icon">✈️</div>
+        <div class="channel-type">Telegram</div>
+        <div class="channel-value">@pinhead_fabrika</div>
+        <p class="channel-desc">Быстро и удобно. Отвечаем в рабочее время.</p>
+      </div>
+      <span class="channel-arrow">↗</span>
+    </a>
+    <a href="https://vk.me/max" class="channel-card">
+      <div>
+        <div class="channel-icon">💬</div>
+        <div class="channel-type">MAX</div>
+        <div class="channel-value">vk.me/max</div>
+        <p class="channel-desc">Пишите фото, размеры, референсы — обсудим детали.</p>
+      </div>
+      <span class="channel-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- MAP + FORM -->
+<section class="section fade-up" style="padding-top: 0;">
+  <div class="contact-grid">
+    <div class="map-card">
+      <div class="map-visual" style="padding: 0; overflow: hidden;">
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?ll=30.346&z=16&pt=30.346,59.914,pm2dbm&text=Наб.+Обводного+канала+24д+Санкт-Петербург"
+          width="100%"
+          height="280"
+          frameborder="0"
+          allowfullscreen="true"
+          style="display: block; border: none;"
+        ></iframe>
+      </div>
+      <div class="map-info">
+        <div class="map-info-label">Адрес производства</div>
+        <div class="map-address">
+          <strong>Санкт-Петербург</strong><br>
+          Наб. Обводного канала, 24д<br>
+          <span class="map-metro">Санкт-Петербург</span>
+        </div>
+        <a href="https://yandex.ru/maps/?text=Наб.+Обводного+канала+24д+Санкт-Петербург" target="_blank" class="map-open-btn">Открыть в Яндекс.Картах →</a>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-title">НАПИШИТЕ НАМ</div>
+      <div class="form-subtitle">✳ Ответим в течение 2 часов</div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Ваше имя *</label>
+          <input type="text" placeholder="Иван Иванов">
+        </div>
+        <div class="form-field">
+          <label>Компания</label>
+          <input type="text" placeholder="ООО Бренд">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Телефон *</label>
+          <input type="tel" placeholder="+7 (999) 000-00-00">
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" placeholder="mail@brand.ru">
+        </div>
+      </div>
+      <div class="form-field" style="margin-bottom: 12px;">
+        <label>Тема обращения</label>
+        <select>
+          <option value="">Выберите тему...</option>
+          <option>Хочу запустить производство</option>
+          <option>Вопрос по тиражу и ценам</option>
+          <option>Хочу приехать на экскурсию</option>
+          <option>Другое</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Сообщение</label>
+        <textarea rows="4" placeholder="Опишите ваш запрос, изделие, тираж и сроки..."></textarea>
+      </div>
+      <button class="form-submit">✳ Отправить сообщение</button>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="section fade-up" style="padding-top: 0;">
+  <div class="visit-grid">
+    <div class="visit-left">
+      <div>
+        <h2>ПРИЕЗЖАЙТЕ<br>НА ФАБРИКУ</h2>
+        <p>У нас формат «открытой кухни» — вы можете приехать, посмотреть производство своими глазами, познакомиться с командой и обсудить проект на месте.</p>
+      </div>
+      fabrika&#64;pnhd.ru
+    </div>
+    <div class="visit-steps">
+      <div class="visit-step">
+        <div class="visit-step-num">01</div>
+        <div>
+          <div class="visit-step-title">НАПИШИТЕ ИЛИ ПОЗВОНИТЕ</div>
+          <p class="visit-step-desc">Сообщите, что хотите приехать. Согласуем удобное время.</p>
+        </div>
+      </div>
+      <div class="visit-step">
+        <div class="visit-step-num">02</div>
+        <div>
+          <div class="visit-step-title">ПРИЕЗЖАЙТЕ В НАЗНАЧЕННОЕ ВРЕМЯ</div>
+          <p class="visit-step-desc">Встретим, проведём по цехам и покажем весь процесс — от раскроя до упаковки.</p>
+        </div>
+      </div>
+      <div class="visit-step">
+        <div class="visit-step-num">03</div>
+        <div>
+          <div class="visit-step-title">ОБСУДИМ ВАШ ПРОЕКТ</div>
+          <p class="visit-step-desc">Познакомитесь с командой, зададите вопросы и получите предварительный расчёт.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section class="section fade-up" style="padding-top: 0;">
+  <div class="section-label">Режим работы</div>
+  <h2 class="section-title">КОГДА МЫ <span class="accent">РАБОТАЕМ</span></h2>
+  <div class="hours-grid">
+    <div class="hours-card">
+      <div class="hours-label">Производство</div>
+      <div class="hours-value">ПН–ПТ</div>
+      <div class="hours-note">09:00 — 18:00<br>Суббота и воскресенье — выходные</div>
+    </div>
+    <div class="hours-card">
+      <div class="hours-label">Отдел продаж</div>
+      <div class="hours-value">ПН–СБ</div>
+      <div class="hours-note">09:00 — 20:00<br>Звонки и сообщения принимаем</div>
+    </div>
+    <div class="hours-card">
+      <div class="hours-label">Время ответа</div>
+      <div class="hours-value" style="color: var(--blue);">2 ЧАСА</div>
+      <div class="hours-note">В рабочее время отвечаем быстро.<br>Вечерние заявки — утром следующего дня.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band fade-up">
+  <div>
+    <h2>ГОТОВЫ ЗАПУСТИТЬ<br><span class="accent">ПРОИЗВОДСТВО?</span></h2>
+    <p>Оставьте заявку — рассчитаем стоимость бесплатно.</p>
+  </div>
+  <a href="zayavka.html" class="btn-white">Оставить заявку →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <svg width="130" height="17" viewBox="0 0 1275 166" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M627.535 57.8959L654.235 28.1662L668.387 39.6703L643.556 67.3257L694.631 54.6644L696.685 73.5178L638.96 87.8287L675.722 117.848L661.576 133.543L620.909 100.342L610.792 165.243H591.039L598.472 117.521L575.64 142.936L561.488 131.432L589.675 100.053L524.332 116.229L522.277 97.3754L595.166 79.3037L542.302 36.1557L556.448 20.4476L607.152 61.8476L616.801 0H636.567L627.541 57.8959H627.529H627.535Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M482.025 115.816H494.19V163.051H465.769V144.666H428.693V163.051H400.271V115.816H412.437V20.0781H482.012V115.816H482.025ZM442.03 115.816H452.431V47.9551H442.03V115.816Z" fill="white"/><path d="M71.5558 145.023H40.8397V40.0949H29.8031V145.023H0.203581L0 20.0781H71.5558V145.023Z" fill="white"/><path d="M110.13 73.7023L121.309 20.0781H152.055V145.023H122.653V98.9264L109.451 145.023H80.5059V20.0781H110.136V73.7023H110.13Z" fill="white"/><path d="M190.811 66.79H201.866V20.0781H232.558V145.023H201.866V85.508H190.811V145.023H161.002V20.0781H190.811V66.79Z" fill="white"/><path d="M281.664 52.473L289.961 20.0781H319.141L298.567 80.4546L323.12 145.023H289.301L278.746 111.12L268.838 145.023H238.146L262.163 78.9466L238.794 20.0781H271.207L281.651 52.473H281.664Z" fill="white"/><path d="M358.421 20.0785C382.592 20.0785 394.683 28.7451 394.683 46.0843V119.017C394.683 136.35 382.598 145.023 358.421 145.023C334.244 145.023 323.121 136.714 323.121 120.082V94.969H353.14V121.049C353.14 124.083 355.62 126.545 358.698 126.545C361.777 126.545 364.257 124.077 364.257 121.049V99.0499H364.226V90.4695H353.597V74.626H364.22V66.0456H364.263V44.0469C364.263 41.0124 361.771 38.5503 358.705 38.5503C355.639 38.5503 353.146 41.0185 353.146 44.0469V70.1142H323.127V45.001C323.127 28.3819 334.892 20.0601 358.427 20.0601V20.0724L358.421 20.0785Z" fill="white"/><path d="M787.604 41.5908C799.956 41.6971 808.981 45.7847 814.553 53.9385C820.146 62.1237 822.938 71.9333 822.938 83.3418C822.937 95.89 819.803 106.047 813.5 113.76C807.267 121.386 798.617 125.235 787.604 125.347V144.999H759.532V125.353C748.069 125.255 739.371 121.75 733.532 114.76C727.624 107.686 724.711 97.1289 724.711 83.1758C724.711 69.2235 727.623 58.814 733.535 51.8887C739.377 45.046 748.075 41.6905 759.532 41.5967V21H787.604V41.5908ZM787.604 106.779C792.114 106.737 795.468 104.833 797.729 101.042C800.04 97.1677 801.228 91.2921 801.228 83.3477C801.228 77.1269 799.94 71.6958 797.375 67.0332C794.929 62.5863 791.676 60.3465 787.604 60.1797V106.779ZM759.532 60.167C755.371 60.2714 752.121 62.3945 749.76 66.6436C747.317 71.0404 746.085 76.5957 746.085 83.3477C746.085 91.2916 747.286 97.1664 749.624 101.04C751.854 104.734 755.136 106.64 759.532 106.773V60.167Z" fill="white"/><path d="M898.541 145.413H871.471L866.856 112.101H854.734L850.07 145.413H823L843.432 21.3237H878.072L898.541 145.413ZM864.66 94.8785L860.73 57.8426L857.01 94.8785H864.66Z" fill="white"/><path d="M907.346 145.023V20.9341H957.908V36.8576H933.972V66.7104C947.556 66.7104 956.909 68.0091 962.029 70.6066C967.143 73.2041 969.703 79.2301 969.703 88.6906V123.043C969.703 130.14 967.581 135.575 963.331 139.354C959.08 143.133 950.308 145.023 937.007 145.023H907.346ZM943.077 120.71V90.9435C943.077 86.6163 940.363 84.4559 934.934 84.4559H933.972V127.29C940.042 127.345 943.077 125.154 943.077 120.716V120.71Z" fill="white"/><path d="M1003.26 99.333V145.023H976.637V20.9341H1005.34C1016.73 20.9341 1025.19 22.3744 1030.71 25.2612C1036.23 28.148 1038.99 34.0324 1038.99 42.9143V77.3527C1038.99 85.4838 1036.74 91.2389 1032.23 94.6181C1027.72 97.9912 1018.06 99.5669 1003.26 99.333H1003.26ZM1012.37 75.0199V45.2533C1012.37 40.8708 1009.33 38.6796 1003.26 38.6796V81.5998C1009.33 81.5998 1012.37 79.4086 1012.37 75.0261V75.0199Z" fill="white"/><path d="M1049.16 144.745V20.6558H1071.97V77.2468L1089.25 20.6558H1118.63V144.745H1095.82V78.6317L1077.24 144.745H1049.16Z" fill="white"/><path d="M1198.16 145.023H1169.05L1153.92 96.0768V145.023H1128.34V20.934H1153.92V64.1805L1163.27 33.226C1165.93 24.4609 1171.68 20.0723 1180.54 20.0723C1186.04 20.0723 1190.18 20.417 119

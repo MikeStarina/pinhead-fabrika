@@ -1,0 +1,43 @@
+name: Deploy to Yandex Cloud
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Yandex Cloud Object Storage
+        uses: yc-actions/yc-obj-storage-upload@v2
+        with:
+          accessKeyId: ${{ secrets.YC_ACCESS_KEY_ID }}
+          secretAccessKey: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+          #yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          bucketName: ${{ secrets.YC_BUCKET_NAME }}
+          source: "./"
+          sourceDir: ./
+          clear: true
+          include: |
+            **/*.html
+            **/*.css
+            **/*.js
+            **/*.json
+            **/*.png
+            **/*.jpg
+            **/*.svg
+            **/*.ico
+            **/*.txt
+          exclude: |
+            .git/**
+            .github/**
+            .gitignore
+            README.md
+            LICENSE
+          public-read: true

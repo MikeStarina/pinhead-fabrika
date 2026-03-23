@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Каталог изделий — ПИНХЭД ФАБРИКА</title>
+  <meta name="description" content="Пошив трикотажной одежды для брендов. Худи, футболки, свитшоты, спортивные костюмы, домашняя и детская одежда. От 100 единиц." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0A0A0A; --white: #FFFFFF; --blue: #1D19EA;
+      --blue-light: #EEEEFF; --gray: #F5F5F5; --gray-mid: #E8E8E8;
+      --text: #222; --text-muted: #888; --radius: 16px; --radius-lg: 24px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'IBM Plex Sans', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-mid);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 64px;
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links li a {
+      text-decoration: none; color: var(--text);
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 8px 14px; border-radius: 8px; transition: background 0.15s;
+    }
+    .nav-links li a:hover { background: var(--gray); }
+    .nav-links li a.active { color: var(--blue); }
+    .nav-cta { background: var(--blue) !important; color: var(--white) !important; border-radius: 8px !important; }
+    .nav-cta:hover { background: var(--black) !important; }
+    .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 8px; cursor: pointer; }
+    .burger span { display: block; width: 24px; height: 2px; background: var(--black); border-radius: 2px; }
+    .mobile-nav {
+      display: none; flex-direction: column; position: absolute;
+      top: 64px; left: 0; right: 0; background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-mid); padding: 12px 20px;
+    }
+    .mobile-nav a {
+      text-decoration: none; color: var(--text); font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 14px 0; border-bottom: 1px solid var(--gray-mid); display: block;
+    }
+    .mobile-nav a:last-child { border-bottom: none; }
+    .mobile-nav.open { display: flex; }
+
+    /* HERO */
+    .page-hero {
+      margin-top: 64px; padding: 64px 40px 56px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end;
+      max-width: 1400px; margin-left: auto; margin-right: auto; margin-top: 64px;
+    }
+    .breadcrumb { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 20px; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    h1.page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 7vw, 110px); line-height: 0.92; }
+    h1.page-title .accent { color: var(--blue); }
+    .hero-actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--black); color: var(--white);
+      font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 14px 28px; text-decoration: none; border-radius: 10px; transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--blue); }
+    .btn-secondary {
+      background: var(--gray); color: var(--black);
+      font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 14px 28px; text-decoration: none; border-radius: 10px; transition: background 0.15s;
+    }
+    .btn-secondary:hover { background: var(--gray-mid); }
+    .hero-lead { font-size: 17px; line-height: 1.7; color: #444; margin-bottom: 28px; }
+
+    /* FILTER */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      background: var(--gray); color: var(--text-muted); border: none; cursor: pointer;
+      padding: 8px 18px; border-radius: 100px; transition: background 0.15s, color 0.15s;
+    }
+    .filter-btn:hover { background: var(--gray-mid); color: var(--text); }
+    .filter-btn.active { background: var(--black); color: var(--white); }
+
+    /* CATALOG GRID */
+    .catalog-section { padding: 0 40px 72px; max-width: 1400px; margin: 0 auto; }
+    .catalog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .catalog-card {
+      background: var(--gray); border-radius: var(--radius);
+      text-decoration: none; color: var(--text); overflow: hidden;
+      transition: background 0.2s, transform 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .catalog-card:hover { background: var(--black); transform: translateY(-4px); }
+    .catalog-card:hover .card-title { color: var(--white); }
+    .catalog-card:hover .card-desc { color: rgba(255,255,255,0.5); }
+    .catalog-card:hover .spec-tag { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); }
+    .catalog-card:hover .card-min { color: rgba(255,255,255,0.35); }
+    .catalog-card:hover .card-arrow { color: var(--blue); }
+    .catalog-card:hover .card-footer { border-top-color: rgba(255,255,255,0.1); }
+
+    .card-img {
+      height: 180px; background: var(--gray-mid); position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; transition: background 0.2s;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .catalog-card:hover .card-img { background: #1a1a1a; }
+    .card-img-letter {
+      position: absolute; font-family: 'Bebas Neue', sans-serif;
+      font-size: 140px; color: rgba(0,0,0,0.04); line-height: 1;
+      user-select: none; transition: color 0.2s;
+    }
+    .catalog-card:hover .card-img-letter { color: rgba(255,255,255,0.03); }
+    .card-img-icon { font-size: 48px; position: relative; z-index: 1; }
+    .card-badge {
+      position: absolute; top: 14px; left: 14px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      background: var(--white); color: var(--text); padding: 4px 10px; border-radius: 100px;
+    }
+    .card-body { padding: 24px 24px 28px; flex: 1; display: flex; flex-direction: column; }
+    .card-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1; margin-bottom: 10px; transition: color 0.2s; }
+    .card-desc { font-size: 13px; line-height: 1.65; color: #555; margin-bottom: 16px; transition: color 0.2s; flex: 1; }
+    .card-specs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .spec-tag {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase;
+      letter-spacing: 0.06em; border: 1px solid var(--gray-mid); color: #777;
+      padding: 4px 10px; border-radius: 6px; transition: all 0.2s;
+    }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--gray-mid); transition: border-color 0.2s; margin-top: auto; }
+    .card-min { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text-muted); transition: color 0.2s; }
+    .card-arrow { font-size: 18px; color: var(--blue); transition: transform 0.15s; }
+    .catalog-card:hover .card-arrow { transform: translate(3px, -3px); }
+
+    .hidden { display: none; }
+
+    /* MATERIALS */
+    .section { padding: 72px 40px; max-width: 1400px; margin: 0 auto; }
+    .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 16px; }
+    h2.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 4vw, 64px); line-height: 1; margin-bottom: 40px; }
+    h2.section-title .accent { color: var(--blue); }
+
+    .materials-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .material-card { background: var(--gray); border-radius: var(--radius); padding: 28px 24px; transition: background 0.2s, transform 0.2s; }
+    .material-card:hover { background: var(--black); transform: translateY(-3px); }
+    .material-card:hover .material-name { color: var(--white); }
+    .material-card:hover .material-desc { color: rgba(255,255,255,0.5); }
+    .material-card:hover .prop { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+    .material-name { font-family: 'Bebas Neue', sans-serif; font-size: 24px; margin-bottom: 10px; transition: color 0.2s; }
+    .material-desc { font-size: 13px; line-height: 1.65; color: #555; margin-bottom: 14px; transition: color 0.2s; }
+    .material-props { display: flex; flex-wrap: wrap; gap: 6px; }
+    .prop { font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; background: var(--white); color: #666; padding: 4px 10px; border-radius: 6px; transition: all 0.2s; }
+
+    /* PROCESS MINI */
+    .process-mini {
+      background: var(--black); border-radius: var(--radius-lg);
+      padding: 48px; margin: 0 40px;
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+    }
+    .process-mini-step { padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.08); }
+    .process-mini-step:first-child { padding-left: 0; }
+    .process-mini-step:last-child { border-right: none; }
+    .process-mini-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--blue); line-height: 1; margin-bottom: 8px; }
+    .process-mini-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--white); margin-bottom: 6px; }
+    .process-mini-desc { font-size: 12px; color: rgba(255,255,255,0.35); line-height: 1.5; }
+
+    /* CTA */
+    .cta-band {
+      background: var(--black); border-radius: var(--radius-lg);
+      padding: 64px 56px; margin: 40px 40px 80px;
+      display: flex; justify-content: space-between; align-items: center; gap: 40px;
+    }
+    .cta-band h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 4vw, 64px); color: var(--white); line-height: 1; }
+    .cta-band h2 .accent { color: var(--blue); }
+    .cta-band p { color: rgba(255,255,255,0.5); font-size: 15px; margin-top: 8px; max-width: 400px; }
+    .btn-white {
+      background: var(--white); color: var(--black);
+      font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 18px 36px; text-decoration: none; border-radius: 10px;
+      white-space: nowrap; transition: background 0.15s, transform 0.1s;
+    }
+    .btn-white:hover { background: var(--blue); color: var(--white); transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer {
+      background: var(--black); color: var(--white);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 40px; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    footer span { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.3); }
+
+    .fade-up { transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.will-animate { opacity: 0; transform: translateY(24px); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1024px) {
+      .page-hero { grid-template-columns: 1fr; gap: 32px; padding: 56px 32px 40px; }
+      .catalog-section { padding: 0 32px 56px; }
+      .catalog-grid { grid-template-columns: 1fr 1fr; }
+      .materials-grid { grid-template-columns: 1fr 1fr; }
+      .process-mini { grid-template-columns: 1fr 1fr; gap: 24px; margin: 0 32px; }
+      .process-mini-step { border-right: none; padding: 0; }
+      .cta-band { flex-direction: column; text-align: center; margin: 32px 32px 60px; padding: 48px 40px; }
+      .section { padding: 56px 32px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .burger { display: flex; }
+      .page-hero { padding: 40px 20px 32px; }
+      .catalog-section { padding: 0 20px 48px; }
+      .catalog-grid { grid-template-columns: 1fr; }
+      .materials-grid { grid-template-columns: 1fr 1fr; }
+      .process-mini { grid-template-columns: 1fr 1fr; margin: 0 20px; padding: 32px 24px; }
+      .cta-band { margin: 24px 20px 48px; padding: 36px 24px; }
+      footer { padding: 28px 20px; border-radius: 12px 12px 0 0; }
+      .section { padding: 48px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="160" height="21" viewBox="0 0 1275 166" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M627.535 57.8959L654.235 28.1662L668.387 39.6703L643.556 67.3257L694.631 54.6644L696.685 73.5178L638.96 87.8287L675.722 117.848L661.576 133.543L620.909 100.342L610.792 165.243H591.039L598.472 117.521L575.64 142.936L561.488 131.432L589.675 100.053L524.332 116.229L522.277 97.3754L595.166 79.3037L542.302 36.1557L556.448 20.4476L607.152 61.8476L616.801 0H636.567L627.541 57.8959H627.529H627.535Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M482.025 115.816H494.19V163.051H465.769V144.666H428.693V163.051H400.271V115.816H412.437V20.0781H482.012V115.816H482.025ZM442.03 115.816H452.431V47.9551H442.03V115.816Z" fill="black"/><path d="M71.5558 145.023H40.8397V40.0949H29.8031V145.023H0.203581L0 20.0781H71.5558V145.023Z" fill="black"/><path d="M110.13 73.7023L121.309 20.0781H152.055V145.023H122.653V98.9264L109.451 145.023H80.5059V20.0781H110.136V73.7023H110.13Z" fill="black"/><path d="M190.811 66.79H201.866V20.0781H232.558V145.023H201.866V85.508H190.811V145.023H161.002V20.0781H190.811V66.79Z" fill="black"/><path d="M281.664 52.473L289.961 20.0781H319.141L298.567 80.4546L323.12 145.023H289.301L278.746 111.12L268.838 145.023H238.146L262.163 78.9466L238.794 20.0781H271.207L281.651 52.473H281.664Z" fill="black"/><path d="M358.421 20.0785C382.592 20.0785 394.683 28.7451 394.683 46.0843V119.017C394.683 136.35 382.598 145.023 358.421 145.023C334.244 145.023 323.121 136.714 323.121 120.082V94.969H353.14V121.049C353.14 124.083 355.62 126.545 358.698 126.545C361.777 126.545 364.257 124.077 364.257 121.049V99.0499H364.226V90.4695H353.597V74.626H364.22V66.0456H364.263V44.0469C364.263 41.0124 361.771 38.5503 358.705 38.5503C355.639 38.5503 353.146 41.0185 353.146 44.0469V70.1142H323.127V45.001C323.127 28.3819 334.892 20.0601 358.427 20.0601V20.0724L358.421 20.0785Z" fill="black"/><path d="M787.604 41.5908C799.956 41.6971 808.981 45.7847 814.553 53.9385C820.146 62.1237 822.938 71.9333 822.938 83.3418C822.937 95.89 819.803 106.047 813.5 113.76C807.267 121.386 798.617 125.235 787.604 125.347V144.999H759.532V125.353C748.069 125.255 739.371 121.75 733.532 114.76C727.624 107.686 724.711 97.1289 724.711 83.1758C724.711 69.2235 727.623 58.814 733.535 51.8887C739.377 45.046 748.075 41.6905 759.532 41.5967V21H787.604V41.5908ZM787.604 106.779C792.114 106.737 795.468 104.833 797.729 101.042C800.04 97.1677 801.228 91.2921 801.228 83.3477C801.228 77.1269 799.94 71.6958 797.375 67.0332C794.929 62.5863 791.676 60.3465 787.604 60.1797V106.779ZM759.532 60.167C755.371 60.2714 752.121 62.3945 749.76 66.6436C747.317 71.0404 746.085 76.5957 746.085 83.3477C746.085 91.2916 747.286 97.1664 749.624 101.04C751.854 104.734 755.136 106.64 759.532 106.773V60.167Z" fill="black"/><path d="M898.541 145.413H871.471L866.856 112.101H854.734L850.07 145.413H823L843.432 21.3237H878.072L898.541 145.413ZM864.66 94.8785L860.73 57.8426L857.01 94.8785H864.66Z" fill="black"/><path d="M907.346 145.023V20.9341H957.908V36.8576H933.972V66.7104C947.556 66.7104 956.909 68.0091 962.029 70.6066C967.143 73.2041 969.703 79.2301 969.703 88.6906V123.043C969.703 130.14 967.581 135.575 963.331 139.354C959.08 143.133 950.308 145.023 937.007 145.023H907.346ZM943.077 120.71V90.9435C943.077 86.6163 940.363 84.4559 934.934 84.4559H933.972V127.29C940.042 127.345 943.077 125.154 943.077 120.716V120.71Z" fill="black"/><path d="M1003.26 99.333V145.023H976.637V20.9341H1005.34C1016.73 20.9341 1025.19 22.3744 1030.71 25.2612C1036.23 28.148 1038.99 34.0324 1038.99 42.9143V77.3527C1038.99 85.4838 1036.74 91.2389 1032.23 94.6181C1027.72 97.9912 1018.06 99.5669 1003.26 99.333H1003.26ZM1012.37 75.0199V45.2533C1012.37 40.8708 1009.33 38.6796 1003.26 38.6796V81.5998C1009.33 81.5998 1012.37 79.4086 1012.37 75.0261V75.0199Z" fill="black"/><path d="M1049.16 144.745V20.6558H1071.97V77.2468L1089.25 20.6558H1118.63V144.745H1095.82V78.6317L1077.24 144.745H1049.16Z" fill="black"/><path d="M1198.16 145.023H1169.05L1153.92 96.0768V145.023H1128.34V20.934H1153.92V64.1805L1163.27 33.226C1165.93 24.4609 1171.68 20.0723 1180.54 20.0723C1186.04 20.0723 1190.18 20.417 1192.96 21.1125V37.6392C1188.27 37.6392 1185.03 40.5814 1183.24 46.4658L1174.13 76.0601L1198.16 145.023Z" fill="black"/><path d="M1275 145.023H1247.93L1243.32 111.711H1231.19L1226.53 145.023H1199.46L1219.89 20.9341H1254.53L1275 145.023ZM1241.12 94.4889L1237.19 57.4529L1233.47 94.4889H1241.12Z" fill="black"/></svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="kontraktnoe-proizvodstvo.html">Производство</a></li>
+    <li><a href="catalog.html" class="active">Каталог</a></li>
+    <li><a href="about.html">О фабрике</a></li>
+    <li><a href="contacts.html">Контакты</a></li>
+    <li><a href="zayavka.html" class="nav-cta">Заявка</a></li>
+  </ul>
+  <button class="burger" id="burger"><span></span><span></span><span></span></button>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="kontraktnoe-proizvodstvo.html">Производство</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="about.html">О фабрике</a>
+    <a href="contacts.html">Контакты</a>
+    <a href="zayavka.html">Заявка →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div>
+    <div class="breadcrumb"><a href="index.html">Главная</a> &nbsp;/&nbsp; Каталог</div>
+    <h1 class="page-title">ПОШИВ<br><span class="accent">✳</span>ИЗДЕЛИЙ</h1>
+    <div class="hero-actions">
+      <a href="zayavka.html" class="btn-primary">Оставить заявку</a>
+      <a href="kontraktnoe-proizvodstvo.html" class="btn-secondary">Как работаем</a>
+    </div>
+  </div>
+  <div>
+    <p class="hero-lead">Шьём трикотажную одежду для брендов. Работаем с вашими лекалами или образцами. От 100 единиц в Санкт-Петербурге.</p>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-cat="all">Все</button>
+      <button class="filter-btn" data-cat="casual">Casual</button>
+      <button class="filter-btn" data-cat="sport">Спорт</button>
+      <button class="filter-btn" data-cat="home">Домашняя</button>
+      <button class="filter-btn" data-cat="kids">Детская</button>
+    </div>
+  </div>
+</div>
+
+<!-- CATALOG -->
+<div class="catalog-section">
+  <div class="catalog-grid" id="catalogGrid">
+
+    <a href="poshiv-hudi.html" class="catalog-card" data-cat="casual">
+      <div class="card-img">
+        <div class="card-img-letter">Х</div>
+        <div class="card-img-icon">🧥</div>
+        <span class="card-badge">Популярное</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">ПОШИВ ХУДИ</div>
+        <p class="card-desc">Худи с капюшоном и кенгуру-карманом. Оверсайз, прямой и приталенный крой. Начёс, петля, флис.</p>
+        <div class="card-specs">
+          <span class="spec-tag">Хлопок</span>
+          <span class="spec-tag">Флис</span>
+          <span class="spec-tag">Оверсайз</span>
+          <span class="spec-tag">Вышивка</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-min">от 100 ед.</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="poshiv-futbolok.html" class="catalog-card" data-cat="casual">
+      <div class="card-img">
+        <div class="card-img-letter">Ф</div>
+        <div class="card-img-icon">👕</div>
+        <span class="card-badge">Базовое</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">ПОШИВ ФУТБОЛОК</div>
+        <p class="card-desc">Классические и оверсайз футболки. Лонгсливы, поло, майки. Любые принты и вышивка.</p>
+        <div class="card-specs">
+          <span class="spec-tag">Кулирка</span>
+          <span class="spec-tag">Интерлок</span>
+          <span class="spec-tag">Принты</span>
+          <span class="spec-tag">Поло</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-min">от 100 ед.</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="poshiv-svitshotov.html" class="catalog-card" data-cat="casual">
+      <div class="card-img">
+        <div class="card-img-letter">С</div>
+        <div class="card-img-icon">🧤</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">ПОШИВ СВИТШОТОВ</div>
+        <p class="card-desc">Свитшоты с начёсом и без. Оверсайз и классический крой. Манжеты, пояс, воротники-стойки.</p>
+        <div class="card-specs">
+          <span class="spec-tag">Начёс</span>
+          <span class="spec-tag">Петля</span>
+          <span class="spec-tag">Оверсайз</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-min">от 100 ед.</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="poshiv-sportivnyh-kostumov.html" class="catalog-card" data-cat="sport">
+      <div class="card-img">
+        <div class="card-img-letter">К</div>
+        <div class="card-img-icon">🏃</div>
+        <span class="card-badge">Комплект</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">СПОРТИВНЫЕ КОСТЮМЫ</div>
+        <p class="card-desc">Комплекты: толстовка + брюки или худи + джоггеры. Карманы, манжеты, утяжки под ваши требования.</p>
+        <div class="card-specs">
+          <span class="spec-tag">Комплект</span>
+          <span class="spec-tag">Джоггеры</span>
+          <span class="spec-tag">Двунитка</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-min">от 100 ед.</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="poshiv-domashnej-odezhdy.html" class="catalog-card" data-cat="home">
+      <div class="card-img">
+        <div class="card-img-letter">Д</div>
+        <div class="card-img-icon">🛋️</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">ДОМАШНЯЯ ОДЕЖДА</div>
+        <p class="card-desc">Lounge wear, пижамные комплекты, халаты, домашние костюмы. Мягкие ткани, комфортный крой.</p>
+        <div class="card-specs">
+          <span class="spec-tag">Lounge wear</span>
+          <span class="spec-tag">Пижамы</span>
+          <span class="spec-tag">Мягкий трикотаж</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-min">от 100 ед.</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="poshiv-detskoj-odezhdy.html" class="catalog-card" data-cat="kids">
+      <div class="card-img">
+        <div class="card-img-letter">Д</div>
+        <div class="card-img-icon">🧸</div>
+        <span class="card-badge">Безопасные ткани</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">ДЕТСКАЯ ОДЕЖДА</div>
+        <p class="card-desc">Детские футболки, худи, костюмы, пижамы. Гипоаллергенные ткани, безопасная фурнитура.</p>
+        <div class="card-specs">
+          <span class="spec-tag">Гипоаллерг.</span>
+          <span class="spec-tag">Органик</span>
+          <span class="spec-tag">0–14 лет</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-min">от 100 ед.</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- MATERIALS -->
+<section class="section fade-up">
+  <div class="section-label">01 / Материалы</div>
+  <h2 class="section-title">С ЧЕГО МЫ <span class="accent">ШЬЁМ</span></h2>
+  <div class="materials-grid">
+    <div class="material-card">
+      <div class="material-name">КУЛИРКА</div>
+      <p class="material-desc">Тонкий хлопковый трикотаж. Идеально для футболок и базовых вещей. Мягкий, дышащий.</p>
+      <div class="material-props"><span class="prop">Футболки</span><span class="prop">Лонгсливы</span></div>
+    </div>
+    <div class="material-card">
+      <div class="material-name">ФУТЕР / НАЧЁС</div>
+      <p class="material-desc">Плотный трикотаж с начёсом внутри. Тёплый и мягкий. Основа для свитшотов и худи.</p>
+      <div class="material-props"><span class="prop">Худи</span><span class="prop">Свитшоты</span></div>
+    </div>
+    <div class="material-card">
+      <div class="material-name">ДВУНИТКА</div>
+      <p class="material-desc">Средний по плотности трикотаж. Универсален для спортивной и повседневной одежды.</p>
+      <div class="material-props"><span class="prop">Костюмы</span><span class="prop">Джоггеры</span></div>
+    </div>
+    <div class="material-card">
+      <div class="material-name">ИНТЕРЛОК</div>
+      <p class="material-desc">Плотный гладкий трикотаж. Хорошо держит форму. Подходит для детской одежды и базы.</p>
+      <div class="material-props"><span class="prop">Детская</span><span class="prop">Поло</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS MINI -->
+<div class="process-mini fade-up">
+  <div class="process-mini-step">
+    <div class="process-mini-num">01</div>
+    <div class="process-mini-title">ЗАЯВКА</div>
+    <p class="process-mini-desc">Опишите изделие, тираж и сроки</p>
+  </div>
+  <div class="process-mini-step">
+    <div class="process-mini-num">02</div>
+    <div class="process-mini-title">РАСЧЁТ</div>
+    <p class="process-mini-desc">КП за 2 часа</p>
+  </div>
+  <div class="process-mini-step">
+    <div class="process-mini-num">03</div>
+    <div class="process-mini-title">ОБРАЗЕЦ</div>
+    <p class="process-mini-desc">Шьём и согласовываем</p>
+  </div>
+  <div class="process-mini-step">
+    <div class="process-mini-num">04</div>
+    <div class="process-mini-title">ПРОИЗВОДСТВО</div>
+    <p class="process-mini-desc">7–21 день</p>
+  </div>
+  <div class="process-mini-step">
+    <div class="process-mini-num">05</div>
+    <div class="process-mini-title">ОТПРАВКА</div>
+    <p class="process-mini-desc">По всей России</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-band fade-up">
+  <div>
+    <h2>ГОТОВЫ ЗАПУСТИТЬ<br><span class="accent">ПРОИЗВОДСТВО?</span></h2>
+    <p>Менеджер свяжется в течение одного рабочего дня и рассчитает стоимость партии.</p>
+  </div>
+  <a href="zayavka.html" class="btn-white">Оставить заявку →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <svg width="130" height="17" viewBox="0 0 1275 166" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M627.535 57.8959L654.235 28.1662L668.387 39.6703L643.556 67.3257L694.631 54.6644L696.685 73.5178L638.96 87.8287L675.722 117.848L661.576 133.543L620.909 100.342L610.792 165.243H591.039L598.472 117.521L575.64 142.936L561.488 131.432L589.675 100.053L524.332 116.229L522.277 97.3754L595.166 79.3037L542.302 36.1557L556.448 20.4476L607.152 61.8476L616.801 0H636.567L627.541 57.8959H627.529H627.535Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M482.025 115.816H494.19V163.051H465.769V144.666H428.693V163.051H400.271V115.816H412.437V20.0781H482.012V115.816H482.025ZM442.03 115.816H452.431V47.9551H442.03V115.816Z" fill="white"/><path d="M71.5558 145.023H40.8397V40.0949H29.8031V145.023H0.203581L0 20.0781H71.5558V145.023Z" fill="white"/><path d="M110.13 73.7023L121.309 20.0781H152.055V145.023H122.653V98.9264L109.451 145.023H80.5059V20.0781H110.136V73.7023H110.13Z" fill="white"/><path d="M190.811 66.79H201.866V20.0781H232.558V145.023H201.866V85.508H190.811V145.023H161.002V20.0781H190.811V66.79Z" fill="white"/><path d="M281.664 52.473L289.961 20.0781H319.141L298.567 80.4546L323.12 145.023H289.301L278.746 111.12L268.838 145.023H238.146L262.163 78.9466L238.794 20.0781H271.207L281.651 52.473H281.664Z" fill="white"/><path d="M358.421 20.0785C382.592 20.0785 394.683 28.7451 394.683 46.0843V119.017C394.683 136.35 382.598 145.023 358.421 145.023C334.244 145.023 323.121 136.714 323.121 120.082V94.969H353.14V121.049C353.14 124.083 355.62 126.545 358.698 126.545C361.777 126.545 364.257 124.077 364.257 121.049V99.0499H364.226V90.4695H353.597V74.626H364.22V66.0456H364.263V44.0469C364.263 41.0124 361.771 38.5503 358.705 38.5503C355.639 38.5503 353.146 41.0185 353.146 44.0469V70.1142H323.127V45.001C323.127 28.3819 334.892 20.0601 358.427 20.0601V20.0724L358.421 20.0785Z" fill="white"/><path d="M787.604 41.5908C799.956 41.6971 808.981 45.7847 814.553 53.9385C820.146 62.1237 822.938 71.9333 822.938 83.3418C822.937 95.89 819.803 106.047 813.5 113.76C807.267 121.386 798.617 125.235 787.604 125.347V144.999H759.532V125.353C748.069 125.255 739.371 121.75 733.532 114.76C727.624 107.686 724.711 97.1289 724.711 83.1758C724.711 69.2235 727.623 58.814 733.535 51.8887C739.377 45.046 748.075 41.6905 759.532 41.5967V21H787.604V41.5908ZM787.604 106.779C792.114 106.737 795.468 104.833 797.729 101.042C800.04 97.1677 801.228 91.2921 801.228 83.3477C801.228 77.1269 799.94 71.6958 797.375 67.0332C794.929 62.5863 791.676 60.3465 787.604 60.1797V106.779ZM759.532 60.167C755.371 60.2714 752.121 62.3945 749.76 66.6436C747.317 71.0404 746.085 76.5957 746.085 83.3477C746.085 91.2916 747.286 97.1664 749.624 101.04C751.854 104.734 755.136 106.64 759.532 106.773V60.167Z" fill="white"/><path d="M898.541 145.413H871.471L866.856 112.101H854.734L850.07 145.413H823L843.432 21.3237H878.072L898.541 145.413ZM864.66 94.8785L860.73 57.8426L857.01 94.8785H864.66Z" fill="white"/><path d="M907.346 145.023V20.9341H957.908V36.8576H933.972V66.7104C947.556 66.7104 956.909 68.0091 962.029 70.6066C967.143 73.2041 969.703 79.2301 969.703 88.6906V123.043C969.703 130.14 967.581 135.575 963.331 139.354C959.08 143.133 950.308 145.023 937.007 145.023H907.346ZM943.077 120.71V90.9435C943.077 86.6163 940.363 84.4559 934.934 84.4559H933.972V127.29C940.042 127.345 943.077 125.154 943.077 120.716V120.71Z" fill="white"/><path d="M1003.26 99.333V145.023H976.637V20.9341H1005.34C1016.73 20.9341 1025.19 22.3744 1030.71 25.2612C1036.23 28.148 1038.99 34.0324 1038.99 42.9143V77.3527C1038.99 85.4838 1036.74 91.2389 1032.23 94.6181C1027.72 97.9912 1018.06 99.5669 1003.26 99.333H1003.26ZM1012.37 75.0199V45.2533C1012.37 40.8708 1009.33 38.6796 1003.26 38.6796V81.5998C1009.33 81.5998 1012.37 79.4086 1012.37 75.0261V75.0199Z" fill="white"/><path d="M1049.16 144.745V20.6558H1071.97V77.2468L1089.25 20.6558H1118.63V144.745H1095.82V78.6317L1077.24 144.745H1049.16Z" fill="white"/><path d="M1198.16 145.023H1169.05L1153.92 96.0768V145.023H1128.34V20.934H1153.92V64.1805L1163.27 33.226C1165.93 24.4609 1171.68 20.0723 1180.54 20.0723C1186.04 20.0723 1190.18 20.417 1192.96 21.1125V37.6392C1188.27 37.6392 1185.03 40.5814 1183.24 46.4658L1174.13 76.0601L1198.16 145.023Z" fill="white"/><path d="M1275 145.023H1247.93L1243.32 111.711H1231.19L1226.53 145.023H1199.46L1219.89 20.9341H1254.53L1275 145.023ZM1241.12 94.4889L1237.19 57.4529L1233.47 94.4889H1241.12Z" fill="white"/></svg>
+  </div>
+  <span>fabrika&#64;pnhd.ru · +7 (812) 000-00-00</span>
+  <span>© 2026 ПИНХЭД ФАБРИКА</span>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Fade-up
+  document.querySelectorAll('.fade-up').forEach(function(el) { el.classList.add('will-animate'); });
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); e.target.classList.remove('will-animate'); }
+    });
+  }, { threshold: 0.04 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+
+  // Filter
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAl
