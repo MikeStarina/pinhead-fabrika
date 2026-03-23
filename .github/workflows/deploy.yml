@@ -9,7 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -17,11 +17,9 @@ jobs:
       - name: Deploy to Yandex Cloud Object Storage
         uses: yc-actions/yc-obj-storage-upload@v2
         with:
-          accessKeyId: ${{ secrets.YC_ACCESS_KEY_ID }}
-          secretAccessKey: ${{ secrets.YC_SECRET_ACCESS_KEY }}
-          bucketName: ${{ secrets.YC_BUCKET_NAME }}
-          source: "./"
-          sourceDir: ./
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          bucket: ${{ secrets.YC_BUCKET_NAME }}
+          root: ./
           clear: true
           include: |
             **/*.html
@@ -39,6 +37,3 @@ jobs:
             .gitignore
             README.md
             LICENSE
-          public-read: true
-
-          
