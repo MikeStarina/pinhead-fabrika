@@ -109,10 +109,21 @@
     .catalog-card:hover .card-footer { border-top-color: rgba(255,255,255,0.1); }
 
     .card-img {
-      height: 180px; background: var(--gray-mid); position: relative;
+      height: 220px; position: relative;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden; transition: background 0.2s;
       border-radius: var(--radius) var(--radius) 0 0;
+      background: var(--gray-mid);
+    }
+    .card-img-photo {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center top;
+      transition: transform 0.4s ease;
+    }
+    .catalog-card:hover .card-img-photo { transform: scale(1.04); }
+    .card-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.18) 100%);
     }
     .catalog-card:hover .card-img { background: #1a1a1a; }
     .card-img-letter {
@@ -139,8 +150,17 @@
     }
     .card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--gray-mid); transition: border-color 0.2s; margin-top: auto; }
     .card-min { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text-muted); transition: color 0.2s; }
+    .card-price { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: var(--black); transition: color 0.2s; }
+    .catalog-card:hover .card-price { color: var(--white); }
     .card-arrow { font-size: 18px; color: var(--blue); transition: transform 0.15s; }
     .catalog-card:hover .card-arrow { transform: translate(3px, -3px); }
+
+    /* SEO H2 — визуально скрыты, семантически присутствуют */
+    .seo-heading {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0;
+    }
 
     .hidden { display: none; }
 
@@ -163,14 +183,17 @@
 
     /* PROCESS MINI */
     .process-mini {
-      background: var(--black); border-radius: var(--radius-lg);
-      padding: 48px; margin: 0 40px;
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin: 0 40px;
     }
-    .process-mini-step { padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.08); }
-    .process-mini-step:first-child { padding-left: 0; }
-    .process-mini-step:last-child { border-right: none; }
-    .process-mini-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--blue); line-height: 1; margin-bottom: 8px; }
+    .process-mini-step {
+      background: var(--black); border-radius: var(--radius);
+      padding: 28px 24px;
+      display: flex; flex-direction: column;
+    }
+    .process-mini-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--blue); line-height: 1; margin-bottom: 12px; }
     .process-mini-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--white); margin-bottom: 6px; }
     .process-mini-desc { font-size: 12px; color: rgba(255,255,255,0.35); line-height: 1.5; }
 
@@ -210,8 +233,7 @@
       .catalog-section { padding: 0 32px 56px; }
       .catalog-grid { grid-template-columns: 1fr 1fr; }
       .materials-grid { grid-template-columns: 1fr 1fr; }
-      .process-mini { grid-template-columns: 1fr 1fr; gap: 24px; margin: 0 32px; }
-      .process-mini-step { border-right: none; padding: 0; }
+      .process-mini { grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0 32px; }
       .cta-band { flex-direction: column; text-align: center; margin: 32px 32px 60px; padding: 48px 40px; }
       .section { padding: 56px 32px; }
     }
@@ -223,7 +245,7 @@
       .catalog-section { padding: 0 20px 48px; }
       .catalog-grid { grid-template-columns: 1fr; }
       .materials-grid { grid-template-columns: 1fr 1fr; }
-      .process-mini { grid-template-columns: 1fr 1fr; margin: 0 20px; padding: 32px 24px; }
+      .process-mini { grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 20px; }
       .cta-band { margin: 24px 20px 48px; padding: 36px 24px; }
       footer { padding: 28px 20px; border-radius: 12px 12px 0 0; }
       .section { padding: 48px 20px; }
@@ -270,7 +292,7 @@
 <div class="page-hero">
   <div>
     <div class="breadcrumb"><a href="index.html">Главная</a> &nbsp;/&nbsp; Каталог</div>
-    <h1 class="page-title">ПОШИВ<br><span class="accent">✳</span>ИЗДЕЛИЙ</h1>
+    <h1 class="page-title">ПОШИВ<br><span class="accent"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span>ИЗДЕЛИЙ</h1>
     <div class="hero-actions">
       <a href="zayavka.html" class="btn-primary">Оставить заявку</a>
       <a href="kontraktnoe-proizvodstvo.html" class="btn-secondary">Как работаем</a>
@@ -292,10 +314,11 @@
 <div class="catalog-section">
   <div class="catalog-grid" id="catalogGrid">
 
+    <h2 class="seo-heading">Пошив худи на заказ в Санкт-Петербурге — контрактное производство от 100 единиц</h2>
     <a href="poshiv-hudi.html" class="catalog-card" data-cat="casual">
       <div class="card-img">
-        <div class="card-img-letter">Х</div>
-        <div class="card-img-icon">🧥</div>
+        <div class="card-img-photo" style="background-image: url('cat-kids.png');"></div>
+        <div class="card-img-overlay"></div>
         <span class="card-badge">Популярное</span>
       </div>
       <div class="card-body">
@@ -309,15 +332,17 @@
         </div>
         <div class="card-footer">
           <span class="card-min">от 100 ед.</span>
-          <span class="card-arrow">↗</span>
+          <span class="card-price">от 500 ₽/ед.</span>
+          <span class="card-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
         </div>
       </div>
     </a>
 
+    <h2 class="seo-heading">Пошив футболок на заказ в Санкт-Петербурге — контрактное производство от 100 единиц</h2>
     <a href="poshiv-futbolok.html" class="catalog-card" data-cat="casual">
       <div class="card-img">
-        <div class="card-img-letter">Ф</div>
-        <div class="card-img-icon">👕</div>
+        <div class="card-img-photo" style="background-image: url('cat-futbolka.jpg'); background-position: center 15%;"></div>
+        <div class="card-img-overlay"></div>
         <span class="card-badge">Базовое</span>
       </div>
       <div class="card-body">
@@ -331,15 +356,17 @@
         </div>
         <div class="card-footer">
           <span class="card-min">от 100 ед.</span>
-          <span class="card-arrow">↗</span>
+          <span class="card-price">от 350 ₽/ед.</span>
+          <span class="card-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
         </div>
       </div>
     </a>
 
+    <h2 class="seo-heading">Пошив свитшотов на заказ в Санкт-Петербурге — контрактное производство от 100 единиц</h2>
     <a href="poshiv-svitshotov.html" class="catalog-card" data-cat="casual">
       <div class="card-img">
-        <div class="card-img-letter">С</div>
-        <div class="card-img-icon">🧤</div>
+        <div class="card-img-photo" style="background-image: url('cat-svishot.jpg'); background-position: center 20%;"></div>
+        <div class="card-img-overlay"></div>
       </div>
       <div class="card-body">
         <div class="card-title">ПОШИВ СВИТШОТОВ</div>
@@ -351,15 +378,17 @@
         </div>
         <div class="card-footer">
           <span class="card-min">от 100 ед.</span>
-          <span class="card-arrow">↗</span>
+          <span class="card-price">от 350 ₽/ед.</span>
+          <span class="card-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
         </div>
       </div>
     </a>
 
+    <h2 class="seo-heading">Пошив спортивных костюмов на заказ в Санкт-Петербурге — контрактное производство от 100 единиц</h2>
     <a href="poshiv-sportivnyh-kostumov.html" class="catalog-card" data-cat="sport">
       <div class="card-img">
-        <div class="card-img-letter">К</div>
-        <div class="card-img-icon">🏃</div>
+        <div class="card-img-photo" style="background-image: url('cat-sport.png'); background-position: center 15%;"></div>
+        <div class="card-img-overlay"></div>
         <span class="card-badge">Комплект</span>
       </div>
       <div class="card-body">
@@ -372,35 +401,39 @@
         </div>
         <div class="card-footer">
           <span class="card-min">от 100 ед.</span>
-          <span class="card-arrow">↗</span>
+          <span class="card-price">от 800 ₽/ед.</span>
+          <span class="card-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
         </div>
       </div>
     </a>
 
+    <h2 class="seo-heading">Пошив домашней одежды на заказ в Санкт-Петербурге — контрактное производство от 100 единиц</h2>
     <a href="poshiv-domashnej-odezhdy.html" class="catalog-card" data-cat="home">
       <div class="card-img">
-        <div class="card-img-letter">Д</div>
-        <div class="card-img-icon">🛋️</div>
+        <div class="card-img-photo" style="background-image: url('cat-home.png'); background-position: center 10%;"></div>
+        <div class="card-img-overlay"></div>
       </div>
       <div class="card-body">
         <div class="card-title">ДОМАШНЯЯ ОДЕЖДА</div>
-        <p class="card-desc">Lounge wear, пижамные комплекты, халаты, домашние костюмы. Мягкие ткани, комфортный крой.</p>
+        <p class="card-desc">Пижамные комплекты, халаты, домашние костюмы. Мягкие ткани, комфортный крой.</p>
         <div class="card-specs">
-          <span class="spec-tag">Lounge wear</span>
+          <span class="spec-tag">Домашний трикотаж</span>
           <span class="spec-tag">Пижамы</span>
           <span class="spec-tag">Мягкий трикотаж</span>
         </div>
         <div class="card-footer">
           <span class="card-min">от 100 ед.</span>
-          <span class="card-arrow">↗</span>
+          <span class="card-price">от 800 ₽/ед.</span>
+          <span class="card-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
         </div>
       </div>
     </a>
 
+    <h2 class="seo-heading">Пошив детской одежды на заказ в Санкт-Петербурге — контрактное производство от 100 единиц</h2>
     <a href="poshiv-detskoj-odezhdy.html" class="catalog-card" data-cat="kids">
       <div class="card-img">
-        <div class="card-img-letter">Д</div>
-        <div class="card-img-icon">🧸</div>
+        <div class="card-img-photo" style="background-image: url('cat-hudi.png'); background-position: center 15%;"></div>
+        <div class="card-img-overlay"></div>
         <span class="card-badge">Безопасные ткани</span>
       </div>
       <div class="card-body">
@@ -413,7 +446,8 @@
         </div>
         <div class="card-footer">
           <span class="card-min">от 100 ед.</span>
-          <span class="card-arrow">↗</span>
+          <span class="card-price">от 500 ₽/ед.</span>
+          <span class="card-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
         </div>
       </div>
     </a>
