@@ -55,10 +55,26 @@
     .mobile-nav.open { display: flex; }
 
     .page-hero {
-      margin-top: 64px; background: var(--black);
+      margin-top: 64px;
+      position: relative;
       padding: 64px 40px;
       display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      overflow: hidden;
     }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url('hero-bg.jpg');
+      background-size: cover; background-position: center 40%;
+      z-index: 0;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.82);
+      z-index: 1;
+    }
+    .page-hero > * { position: relative; z-index: 2; }
     .hero-tag {
       font-family: 'IBM Plex Mono', monospace; font-size: 11px;
       text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4);
@@ -580,9 +596,63 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!document.querySelector('[name="name"]').value.trim() || !document.querySelector('[name="phone"]').value.trim()) {
       alert('Пожалуйста, заполните имя и телефон'); return;
     }
+
+    // Собираем все данные формы
+    var formData = {
+      name:       document.querySelector('[name="name"]').value.trim(),
+      phone:      document.querySelector('[name="phone"]').value.trim(),
+      company:    document.querySelector('[name="company"]').value.trim(),
+      email:      document.querySelector('[name="email"]').value.trim(),
+      source:     document.querySelector('[name="source"]').value.trim(),
+      categories: document.getElementById('categoriesInput').value,
+      volume:     document.getElementById('volumeInput').value,
+      model:      document.getElementById('modelInput').value,
+      comment:    document.querySelector('[name="comment"]').value.trim()
+    };
+
     var btn = document.getElementById('submitBtn');
     btn.classList.add('loading'); btn.textContent = '✳ ОТПРАВЛЯЕМ...';
+
+    // ─── БИТРИКС24 WEBHOOK ───────────────────────────────────────────
+    // Замените BITRIX_WEBHOOK_URL на реальный URL вашего вебхука
+    var BITRIX_WEBHOOK_URL = 'ВСТАВЬТЕ_URL_WEBHOOK_БИТРИКС24';
+
+    var bitrixFields = {
+      'fields[TITLE]':    'Заявка с сайта: ' + formData.name,
+      'fields[NAME]':     formData.name,
+      'fields[PHONE][0][VALUE]': formData.phone,
+      'fields[PHONE][0][VALUE_TYPE]': 'WORK',
+      'fields[EMAIL][0][VALUE]': formData.email,
+      'fields[EMAIL][0][VALUE_TYPE]': 'WORK',
+      'fields[COMPANY_TITLE]': formData.company,
+      'fields[COMMENTS]': [
+        'Категории: ' + (formData.categories || 'не указано'),
+        'Тираж: ' + (formData.volume || 'не указано'),
+        'Модель: ' + (formData.model || 'не указано'),
+        'Источник: ' + (formData.source || 'не указано'),
+        'Комментарий: ' + (formData.comment || 'не указано')
+      ].join('\n'),
+      'fields[SOURCE_ID]': 'WEB',
+      'fields[OPENED]': 'Y'
+    };
+
+    var params = Object.keys(bitrixFields)
+      .map(function(k) { return encodeURIComponent(k) + '=' + encodeURIComponent(bitrixFields[k]); })
+      .join('&');
+
+    if (BITRIX_WEBHOOK_URL !== 'ВСТАВЬТЕ_URL_WEBHOOK_БИТРИКС24') {
+      fetch(BITRIX_WEBHOOK_URL + 'crm.lead.add.json?' + params, { method: 'POST' })
+        .catch(function(err) { console.warn('Bitrix webhook error:', err); });
+    }
+    // ─────────────────────────────────────────────────────────────────
+
     setTimeout(function() {
       document.getElementById('formBody').style.display = 'none';
       document.getElementById('successScreen').classList.add('visible');
-  
+    }, 600);
+  });
+
+});
+</script>
+</body>
+</html>
