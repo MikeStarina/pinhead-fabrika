@@ -346,7 +346,7 @@
     }
     .catalog-card-arrow {
       position: absolute; top: 16px; right: 16px; z-index: 1;
-      font-size: 18px; color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.9);
       transition: color 0.2s, transform 0.2s;
     }
     .catalog-card:hover .catalog-card-arrow { color: var(--white); }
@@ -428,7 +428,8 @@
     @media (max-width: 1024px) {
       .hero { grid-template-columns: 1fr; padding: 60px 32px 40px; gap: 40px; }
       .hero-right { max-width: 500px; }
-      .utp-grid { grid-template-columns: repeat(3, 1fr); }
+      .utp-grid { grid-template-columns: repeat(2, 1fr); }
+      .utp-card { padding: 16px 14px; }
       .utp-card:nth-child(n) { grid-column: auto; grid-row: auto; }
       .catalog-grid { grid-template-columns: 1fr 1fr; }
       .steps-grid { grid-template-columns: 1fr 1fr; }
@@ -461,6 +462,7 @@
       h2.section-title { font-size: clamp(28px, 8vw, 44px); }
       /* GRIDS */
       .utp-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .utp-card { max-width: 100%; min-width: 0; }
       .utp-card:nth-child(n) { grid-column: auto; grid-row: auto; }
       .catalog-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
       .steps-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -772,6 +774,18 @@
     @media (max-width: 900px) { .seo-text-block { grid-template-columns: 1fr; } }
 
   </style>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=107727358', 'ym');
+    ym(107727358, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/107727358" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
 </head>
 <body>
 
@@ -942,7 +956,7 @@
     <a class="catalog-card" href="poshiv-hudi.html">
       <div class="catalog-card-bg" style="background-image: url('hudi.jpg')"></div>
       <div class="catalog-card-overlay"></div>
-      <span class="catalog-card-arrow">↗</span>
+      <span class="catalog-card-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       <div class="catalog-card-content">
         <span class="catalog-card-tag">Популярное</span>
         <div class="catalog-card-title">ПОШИВ ХУДИ</div>
@@ -951,7 +965,7 @@
     <a class="catalog-card" href="poshiv-futbolok.html">
       <div class="catalog-card-bg" style="background-image: url('futbolki.jpg')"></div>
       <div class="catalog-card-overlay"></div>
-      <span class="catalog-card-arrow">↗</span>
+      <span class="catalog-card-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       <div class="catalog-card-content">
         <span class="catalog-card-tag">Популярное</span>
         <div class="catalog-card-title">ПОШИВ ФУТБОЛОК</div>
@@ -960,7 +974,7 @@
     <a class="catalog-card" href="coming-soon.html">
       <div class="catalog-card-bg" style="background-image: url('svitshoty.jpg')"></div>
       <div class="catalog-card-overlay"></div>
-      <span class="catalog-card-arrow">↗</span>
+      <span class="catalog-card-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       <div class="catalog-card-content">
         <span class="catalog-card-tag">Трикотаж</span>
         <div class="catalog-card-title">СВИТШОТЫ</div>
@@ -969,7 +983,7 @@
     <a class="catalog-card" href="coming-soon.html">
       <div class="catalog-card-bg" style="background-image: url('sport-kostyum.jpg')"></div>
       <div class="catalog-card-overlay"></div>
-      <span class="catalog-card-arrow">↗</span>
+      <span class="catalog-card-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       <div class="catalog-card-content">
         <span class="catalog-card-tag">Комплекты</span>
         <div class="catalog-card-title">СПОРТИВНЫЕ КОСТЮМЫ</div>
@@ -978,7 +992,7 @@
     <a class="catalog-card" href="coming-soon.html">
       <div class="catalog-card-bg" style="background-image: url('domashnyaya.jpg')"></div>
       <div class="catalog-card-overlay"></div>
-      <span class="catalog-card-arrow">↗</span>
+      <span class="catalog-card-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       <div class="catalog-card-content">
         <span class="catalog-card-tag">Lounge</span>
         <div class="catalog-card-title">ДОМАШНЯЯ ОДЕЖДА</div>
@@ -987,7 +1001,7 @@
     <a class="catalog-card" href="coming-soon.html">
       <div class="catalog-card-bg" style="background-image: url('detskaya.jpg')"></div>
       <div class="catalog-card-overlay"></div>
-      <span class="catalog-card-arrow">↗</span>
+      <span class="catalog-card-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       <div class="catalog-card-content">
         <span class="catalog-card-tag">Детские</span>
         <div class="catalog-card-title">ДЕТСКАЯ ОДЕЖДА</div>
