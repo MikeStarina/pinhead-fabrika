@@ -47,6 +47,18 @@
     .nav-links li a.active { color: var(--blue); }
     .nav-cta { background: var(--blue) !important; color: var(--white) !important; border-radius: 8px !important; }
     .nav-cta:hover { background: var(--black) !important; }
+    .nav-contacts {
+      display: flex; align-items: center; gap: 4px; margin-right: 8px;
+      border-right: 1px solid var(--gray-mid); padding-right: 12px;
+    }
+    .nav-contact-item {
+      display: flex; align-items: center;
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+      padding: 8px 10px; border-radius: 8px; transition: background 0.15s;
+    }
+    .nav-contact-item:hover { background: var(--gray); }
+    .nav-contact-value { color: var(--text); text-decoration: none; }
+    @media (max-width: 1024px) { .nav-contacts { display: none; } }
     .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 8px; cursor: pointer; }
     .burger span { display: block; width: 24px; height: 2px; background: var(--black); border-radius: 2px; }
     .mobile-nav {
@@ -360,6 +372,16 @@
     <li><a href="catalog.html">Каталог</a></li>
     <li><a href="about.html" class="active">О фабрике</a></li>
     <li><a href="contacts.html">Контакты</a></li>
+    <li>
+      <div class="nav-contacts">
+        <div class="nav-contact-item">
+          <a href="tel:+78124072715" class="nav-contact-value">+7 (812) 407-27-15</a>
+        </div>
+        <div class="nav-contact-item">
+          <a id="nav-email" href="#" class="nav-contact-value"></a>
+        </div>
+      </div>
+    </li>
     <li><a href="zayavka.html" class="nav-cta">Заявка</a></li>
   </ul>
   <button class="burger" id="burger"><span></span><span></span><span></span></button>
@@ -376,12 +398,12 @@
 <div class="page-hero">
   <div>
     <div class="breadcrumb"><a href="index.html">Главная</a> &nbsp;/&nbsp; О фабрике</div>
-    <h1 class="page-title">О ФАБ<span class="accent">✳</span>РИКЕ</h1>
+    <h1 class="page-title">О <span class="accent" style="display:inline-flex;vertical-align:middle;"><svg width="0.7em" height="0.7em" viewBox="0 0 172 166" fill="currentColor"><path d="M627.535 57.8959L654.235 28.1662L668.387 39.6703L643.556 67.3257L694.631 54.6644L696.685 73.5178L638.96 87.8287L675.722 117.848L661.576 133.543L620.909 100.342L610.792 165.243H591.039L598.472 117.521L575.64 142.936L561.488 131.432L589.675 100.053L524.332 116.229L522.277 97.3754L595.166 79.3037L542.302 36.1557L556.448 20.4476L607.152 61.8476L616.801 0H636.567L627.541 57.8959H627.529H627.535Z" transform="translate(-516,0)"/></svg></span> ФАБРИКЕ</h1>
   </div>
   <div>
     <p class="page-hero-lead">Мы — Pinhead Фабрика. Контрактное производство трикотажной одежды в Санкт-Петербурге. Шьём для брендов — не для себя.</p>
     <div class="hero-tags">
-      <span class="tag tag-blue">✳ Санкт-Петербург</span>
+      <span class="tag tag-blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px;"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg>Санкт-Петербург</span>
       <span class="tag">Трикотаж</span>
       <span class="tag">От 100 единиц</span>
       <span class="tag">Открытое производство</span>
@@ -427,12 +449,12 @@
       <p>Если объяснить просто — мы помогаем брендам превратить идею одежды в готовый продукт, который можно продавать.</p>
     </div>
     <div class="kitchen-card">
-      <div class="kitchen-card-bg">✳</div>
+      <div class="kitchen-card-bg"><svg viewBox="0 0 24 24" fill="currentColor" width="100%" height="100%"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
       <div>
         <h3>ОТКРЫТАЯ<br><span>КУХНЯ</span></h3>
         <p>У нас формат «открытой кухни». Клиент может приехать на производство, посмотреть как всё устроено, познакомиться с командой и увидеть процесс своими глазами. Мы не скрываем производство.</p>
       </div>
-      <a href="contacts.html" class="kitchen-link">Приехать на фабрику →</a>
+      <button class="kitchen-link" id="kitchenPopupBtn">Приехать на фабрику →</button>
     </div>
   </div>
 </section>
@@ -527,25 +549,25 @@
       <div class="client-icon">🚀</div>
       <h3 class="client-title">МОЛОДЫЕ БРЕНДЫ</h3>
       <p class="client-desc">Дизайнеры и предприниматели 23–35 лет, которые только запускают свой бренд. Продают через Instagram, Telegram, шоурумы. Боятся больших партий — им важна гибкость и помощь с лекалами.</p>
-      <span class="client-range">✳ Тираж: 100–300 единиц</span>
+      <span class="client-range"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px;"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg>Тираж: 100–300 единиц</span>
     </div>
     <div class="client-card">
       <div class="client-icon">📈</div>
       <h3 class="client-title">РАСТУЩИЕ БРЕНДЫ</h3>
       <p class="client-desc">Бренды с историей 2–5 лет, своей командой и продажами через сайт и маркетплейсы. Часто меняют фабрики в поиске стабильного производства. Ценят качество и соблюдение сроков.</p>
-      <span class="client-range">✳ Тираж: 200–1000 единиц</span>
+      <span class="client-range"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px;"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg>Тираж: 200–1000 единиц</span>
     </div>
     <div class="client-card">
       <div class="client-icon">🛒</div>
       <h3 class="client-title">МАРКЕТПЛЕЙСЫ</h3>
       <p class="client-desc">Предприниматели на Wildberries и Ozon. Мыслят категориями продаж и аналитики. Запускают производство популярных моделей. Важны цена, скорость и возможность масштабировать.</p>
-      <span class="client-range">✳ Тираж: 500–5000 единиц</span>
+      <span class="client-range"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px;"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg>Тираж: 500–5000 единиц</span>
     </div>
     <div class="client-card">
       <div class="client-icon">🏪</div>
-      <h3 class="client-title">PRIVATE LABEL</h3>
+      <h3 class="client-title">СОБСТВЕННЫЙ БРЕНД (PRIVATE LABEL)</h3>
       <p class="client-desc">Компании, которые делают одежду под собственными брендами для магазинов. Решения принимают закупщики и продакт-менеджеры. Проекты часто идут через тендеры.</p>
-      <span class="client-range">✳ Тираж: 1000–10000 единиц</span>
+      <span class="client-range"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px;"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg>Тираж: 1000–10000 единиц</span>
     </div>
   </div>
 </section>
@@ -574,7 +596,75 @@
   <span>© 2026 ПИНХЭД ФАБРИКА</span>
 </footer>
 
+<!-- KITCHEN POPUP -->
+<div id="kitchenPopup" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:var(--black); border-radius:24px; padding:48px; max-width:520px; width:100%; position:relative;">
+    <button onclick="document.getElementById('kitchenPopup').style.display='none'" style="position:absolute;top:20px;right:20px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:20px;cursor:pointer;line-height:1;">✕</button>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:16px;"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg> Запись на фабрику</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--white);line-height:1;margin-bottom:16px;">ПРИЕДЕМ<br><span style="color:var(--blue);">ПОЗНАКОМИТЬСЯ?</span></h2>
+    <p style="font-size:14px;color:rgba(255,255,255,0.45);margin-bottom:28px;line-height:1.65;">Оставьте контакты — свяжемся и согласуем удобное время для визита на производство.</p>
+    <div id="kitchen-form-box" style="display:flex;flex-direction:column;gap:12px;">
+      <input type="text" id="kitchen-name" placeholder="Ваше имя *" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px 18px;color:var(--white);font-size:15px;font-family:'IBM Plex Sans',sans-serif;outline:none;width:100%;box-sizing:border-box;">
+      <input type="tel" id="kitchen-phone" placeholder="Номер телефона *" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px 18px;color:var(--white);font-size:15px;font-family:'IBM Plex Sans',sans-serif;outline:none;width:100%;box-sizing:border-box;">
+      <button id="kitchen-submit" style="background:var(--blue);color:var(--white);border:none;border-radius:12px;padding:16px 24px;font-family:'IBM Plex Mono',monospace;font-size:13px;cursor:pointer;text-transform:uppercase;letter-spacing:0.08em;transition:background 0.15s;">Записаться на визит →</button>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.2);text-align:center;">✱ Свяжемся в течение рабочего дня</div>
+    </div>
+    <div id="kitchen-success" style="display:none;text-align:center;padding:32px 0;">
+      <div style="font-size:40px;margin-bottom:16px;color:var(--blue);"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--white);margin-bottom:8px;">ОТЛИЧНО!</h3>
+      <p style="font-size:14px;color:rgba(255,255,255,0.4);">Свяжемся с вами в течение рабочего дня.</p>
+    </div>
+  </div>
+</div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
+  // Fade-up animation
   document.querySelectorAll('.fade-up').forEach(function(el) {
-    el.class
+    el.classList.add('will-animate');
+  });
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); e.target.classList.remove('will-animate'); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+
+  // Email через JS
+  var navEmail = document.getElementById('nav-email');
+  if (navEmail) { navEmail.href = 'mailto:fabrika@pnhd.ru'; navEmail.textContent = 'fabrika@pnhd.ru'; }
+
+  // Burger menu
+  var burger = document.getElementById('burger');
+  var mobileNav = document.getElementById('mobile-nav');
+  if (burger) burger.addEventListener('click', function() { mobileNav.classList.toggle('open'); });
+
+  // Kitchen popup
+  var kitchenBtn = document.getElementById('kitchenPopupBtn');
+  var kitchenPopup = document.getElementById('kitchenPopup');
+  if (kitchenBtn) {
+    kitchenBtn.addEventListener('click', function() {
+      kitchenPopup.style.display = 'flex';
+    });
+  }
+  kitchenPopup.addEventListener('click', function(e) {
+    if (e.target === kitchenPopup) kitchenPopup.style.display = 'none';
+  });
+
+  // Kitchen form submit
+  var kitchenSubmit = document.getElementById('kitchen-submit');
+  if (kitchenSubmit) {
+    kitchenSubmit.addEventListener('click', function() {
+      var name = document.getElementById('kitchen-name').value.trim();
+      var phone = document.getElementById('kitchen-phone').value.trim();
+      if (!name || !phone) { alert('Пожалуйста, заполните имя и телефон'); return; }
+      document.getElementById('kitchen-form-box').style.display = 'none';
+      document.getElementById('kitchen-success').style.display = 'block';
+    });
+  }
+
+});
+</script>
+</body>
+</html>
