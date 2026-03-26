@@ -368,7 +368,7 @@
     /* FOOTER */
     footer {
       background: var(--black); color: var(--white);
-      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      border-radius: 0;
       padding: 40px; margin-top: 0;
       display: flex; justify-content: space-between; align-items: center;
       flex-wrap: wrap; gap: 16px;
@@ -455,8 +455,10 @@
       .quick-form-section { padding: 52px 20px; }
       .quick-form-inner { grid-template-columns: 1fr; gap: 32px; }
       .quick-form-title { font-size: clamp(32px, 9vw, 48px); }
+      /* VIDEO */
+      .video-grid { grid-template-columns: 1fr !important; }
       /* FOOTER */
-      footer { padding: 28px 20px; border-radius: 12px 12px 0 0; }
+      footer { padding: 28px 20px; border-radius: 0; }
       footer svg { width: 130px !important; height: 17px !important; }
     }
     @media (max-width: 480px) {
@@ -800,7 +802,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-tag"><span>✳</span> Трикотажная фабрика — Санкт-Петербург</div>
+    <div class="hero-tag"><span><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span> Трикотажная фабрика — Санкт-Петербург</div>
     <h1 class="hero-title">
       КОНТРАКТНЫЙ<br>
       ПОШИВ<br>
@@ -849,18 +851,18 @@
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-track">
-    <span class="ticker-item">ПИНХЭД ФАБРИКА</span><span class="ticker-sep">✳</span>
-    <span class="ticker-item">КОНТРАКТНОЕ ПРОИЗВОДСТВО</span><span class="ticker-sep">✳</span>
-    <span class="ticker-item">ПОШИВ ТРИКОТАЖА</span><span class="ticker-sep">✳</span>
-    <span class="ticker-item">ОТ 100 ЕДИНИЦ</span><span class="ticker-sep">✳</span>
-    <span class="ticker-item">БРЕНДИРОВАНИЕ И УПАКОВКА</span><span class="ticker-sep">✳</span>
-    <span class="ticker-item">КОНТРОЛЬ КАЧЕСТВА</span><span class="ticker-sep">✳</span>
-    <span class="ticker-item">ПИНХЭД ФАБРИКА</span><span class="ticker-sep">✳</span>
-    <span class="ticker-item">КОНТРАКТНОЕ ПРОИЗВОДСТВО</span><span class="ticker-sep">✳</span>
-    <span class="ticker-item">ПОШИВ ТРИКОТАЖА</span><span class="ticker-sep">✳</span>
-    <span class="ticker-item">ОТ 100 ЕДИНИЦ</span><span class="ticker-sep">✳</span>
-    <span class="ticker-item">БРЕНДИРОВАНИЕ И УПАКОВКА</span><span class="ticker-sep">✳</span>
-    <span class="ticker-item">КОНТРОЛЬ КАЧЕСТВА</span><span class="ticker-sep">✳</span>
+    <span class="ticker-item">ПИНХЭД ФАБРИКА</span><span class="ticker-sep"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span>
+    <span class="ticker-item">КОНТРАКТНОЕ ПРОИЗВОДСТВО</span><span class="ticker-sep"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span>
+    <span class="ticker-item">ПОШИВ ТРИКОТАЖА</span><span class="ticker-sep"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span>
+    <span class="ticker-item">ОТ 100 ЕДИНИЦ</span><span class="ticker-sep"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span>
+    <span class="ticker-item">БРЕНДИРОВАНИЕ И УПАКОВКА</span><span class="ticker-sep"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span>
+    <span class="ticker-item">КОНТРОЛЬ КАЧЕСТВА</span><span class="ticker-sep"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span>
+    <span class="ticker-item">ПИНХЭД ФАБРИКА</span><span class="ticker-sep"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span>
+    <span class="ticker-item">КОНТРАКТНОЕ ПРОИЗВОДСТВО</span><span class="ticker-sep"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span>
+    <span class="ticker-item">ПОШИВ ТРИКОТАЖА</span><span class="ticker-sep"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span>
+    <span class="ticker-item">ОТ 100 ЕДИНИЦ</span><span class="ticker-sep"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span>
+    <span class="ticker-item">БРЕНДИРОВАНИЕ И УПАКОВКА</span><span class="ticker-sep"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span>
+    <span class="ticker-item">КОНТРОЛЬ КАЧЕСТВА</span><span class="ticker-sep"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span>
   </div>
 </div>
 
@@ -870,32 +872,32 @@
   <h2 class="section-title">ЧЕМ МЫ <span class="accent">ОТЛИЧАЕМСЯ</span></h2>
   <div class="utp-grid">
     <div class="utp-card">
-      <div class="utp-card-icon">✳</div>
+      <div class="utp-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
       <div class="utp-card-title">ОТКРЫТОЕ ПРОИЗВОДСТВО</div>
       <p class="utp-card-desc">Приезжайте и смотрите сами — мы не скрываем, как работаем</p>
     </div>
     <div class="utp-card">
-      <div class="utp-card-icon">✳</div>
+      <div class="utp-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
       <div class="utp-card-title">КАЧЕСТВО КАК В ОБРАЗЦЕ</div>
       <p class="utp-card-desc">Каждая партия проходит ОТК перед отправкой</p>
     </div>
     <div class="utp-card">
-      <div class="utp-card-icon">✳</div>
+      <div class="utp-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
       <div class="utp-card-title">ОТ 100 ЕДИНИЦ</div>
       <p class="utp-card-desc">Подходим молодым брендам — не требуем огромных тиражей сразу</p>
     </div>
     <div class="utp-card">
-      <div class="utp-card-icon">✳</div>
+      <div class="utp-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
       <div class="utp-card-title">СРОКИ 7–21 ДЕНЬ</div>
       <p class="utp-card-desc">Понятные дедлайны на старте, без размытых «договоримся»</p>
     </div>
     <div class="utp-card">
-      <div class="utp-card-icon">✳</div>
+      <div class="utp-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
       <div class="utp-card-title">ТОЛЬКО ТРИКОТАЖ</div>
       <p class="utp-card-desc">Специализация, а не «шьём всё» — знаем материал глубоко</p>
     </div>
     <div class="utp-card">
-      <div class="utp-card-icon">✳</div>
+      <div class="utp-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
       <div class="utp-card-title">СЕРТИФИЦИРОВАННОЕ ПРОИЗВОДСТВО</div>
       <p class="utp-card-desc">Работаем с документами: сертификаты ГОСТ на ткани, декларации соответствия, сопроводительные документы для маркетплейсов</p>
     </div>
@@ -1027,7 +1029,7 @@
 <section class="section fade-up" style="padding-top: 0;">
   <div class="section-label">Производство изнутри</div>
   <h2 class="section-title">СМОТРИТЕ КАК МЫ <span class="accent">РАБОТАЕМ</span></h2>
-  <div style="display: grid; grid-template-columns: 1fr 400px; gap: 16px; align-items: start;">
+  <div class="video-grid">
     <div style="border-radius: var(--radius); overflow: hidden; background: var(--black); aspect-ratio: 16/9; position: relative;">
       <iframe
         src="https://www.youtube.com/embed/live_stream?channel=ВСТАВЬТЕ_ID_КАНАЛА"
@@ -1231,7 +1233,7 @@
 <section class="quick-form-section fade-up">
   <div class="quick-form-inner">
     <div class="quick-form-left">
-      <div class="quick-form-label">✳ Обсудим ваш заказ</div>
+      <div class="quick-form-label"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg> Обсудим ваш заказ</div>
       <h2 class="quick-form-title">ХОТИТЕ<br>ОБСУДИТЬ<br><span class="accent">ВАШ ЗАКАЗ?</span></h2>
       <p class="quick-form-desc">Оставьте контакты — свяжемся в течение 15 минут и ответим на все вопросы по тиражу, срокам и стоимости.</p>
     </div>
@@ -1244,7 +1246,7 @@
           <input type="tel" id="quick-phone" placeholder="Номер телефона *">
         </div>
         <button class="quick-form-btn" id="quick-submit">Жду звонка →</button>
-        <div class="quick-form-note">✳ Свяжемся в течение 15 минут</div>
+        <div class="quick-form-note">✱ Свяжемся в течение 15 минут</div>
       </div>
       <div class="quick-form-success" id="quick-success">
         <div class="quick-form-success-icon">✳</div>
@@ -1368,7 +1370,7 @@
       <div class="case-popup-photo" style="height:100%;"><img src="case4-bg.jpg" alt="Производство Пинхэд Фабрика" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     </div>
     <div class="case-popup-info">
-      <div class="case-popup-tag">✳ Следующий кейс — ваш</div>
+      <div class="case-popup-tag">✱ Следующий кейс — ваш</div>
       <div class="case-popup-title">ХОТИТЕ<br>ЗАПУСТИТЬ<br>ПРОИЗВОДСТВО?</div>
       <div class="case-popup-desc">Оставьте заявку — рассчитаем стоимость, обсудим материалы и сроки. Работаем от 100 единиц.</div>
       <div class="case-cta-steps">
