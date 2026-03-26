@@ -73,12 +73,13 @@
 
     /* QUICK FORM */
     .quick-form-section {
-      background: var(--black); border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-      padding: 80px 40px; margin: 0;
+      background: var(--black);
+      padding: 80px 40px;
+      margin: 0;
     }
     .quick-form-inner {
-      max-width: 1400px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 480px; gap: 60px; align-items: center;
+      max-width: 960px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center;
     }
     .quick-form-left {}
     .quick-form-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
@@ -895,8 +896,8 @@
     </div>
     <div class="utp-card">
       <div class="utp-card-icon">✳</div>
-      <div class="utp-card-title">ВЫ БРЕНД — МЫ ПРОИЗВОДСТВО</div>
-      <p class="utp-card-desc">Берём на себя весь цикл: от приёмки ткани до упаковки и отправки</p>
+      <div class="utp-card-title">СЕРТИФИЦИРОВАННОЕ ПРОИЗВОДСТВО</div>
+      <p class="utp-card-desc">Работаем с документами: сертификаты ГОСТ на ткани, декларации соответствия, сопроводительные документы для маркетплейсов</p>
     </div>
   </div>
 </section>
@@ -1363,8 +1364,8 @@
 
 <div class="case-popup-overlay" id="case-4" onclick="if(event.target===this)closeCase(this)">
   <div class="case-popup case-popup-cta">
-    <div class="case-popup-photos">
-      <div class="case-popup-photo" style="grid-column:1/-1;"><img src="case4-bg.jpg" alt="Производство Пинхэд Фабрика"></div>
+    <div class="case-popup-photos" style="display:block;">
+      <div class="case-popup-photo" style="height:100%;"><img src="case4-bg.jpg" alt="Производство Пинхэд Фабрика" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
     </div>
     <div class="case-popup-info">
       <div class="case-popup-tag">✳ Следующий кейс — ваш</div>
