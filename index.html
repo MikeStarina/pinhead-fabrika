@@ -120,25 +120,8 @@
     .burger span { display: block; width: 24px; height: 2px; background: var(--black); border-radius: 2px; }
 
     /* HERO */
-    .hero-section {
-      position: relative;
-      margin-top: 64px;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('hero-bg.jpg');
-      background-size: cover;
-      background-position: center 40%;
-      opacity: 0.08;
-      pointer-events: none;
-      z-index: 0;
-    }
     .hero {
-      position: relative;
-      z-index: 1;
-      margin-top: 0;
+      margin-top: 64px;
       min-height: calc(100vh - 64px);
       padding: 80px 40px 60px;
       display: grid;
@@ -148,6 +131,7 @@
       max-width: 1400px;
       margin-left: auto;
       margin-right: auto;
+      margin-top: 64px;
       overflow: hidden;
     }
     .hero-left { display: flex; flex-direction: column; gap: 32px; }
@@ -281,25 +265,32 @@
 
     /* UTP */
     .utp-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-      grid-auto-rows: 1fr;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
     }
     .utp-card {
-      background: var(--gray); border-radius: var(--radius);
-      padding: 32px 28px; transition: background 0.2s, transform 0.2s;
+      background: var(--gray); border-radius: 16px;
+      padding: 20px 18px; transition: transform 0.2s;
+      display: flex; flex-direction: column; gap: 10px;
     }
-    .utp-card:hover { background: var(--black); transform: translateY(-3px); }
-    .utp-card:hover .utp-card-title { color: var(--white); }
-    .utp-card:hover .utp-card-desc { color: rgba(255,255,255,0.55); }
-    .utp-card-icon { font-size: 20px; color: var(--blue); margin-bottom: 16px; }
+    .utp-card:hover { transform: translateY(-2px); }
+    .utp-card.blue  { background: var(--blue); }
+    .utp-card.dark  { background: var(--black); }
+    .utp-card-icon { color: var(--blue); }
+    .utp-card.blue .utp-card-icon,
+    .utp-card.dark .utp-card-icon { color: rgba(255,255,255,0.4); }
     .utp-card-title {
-      font-family: 'Bebas Neue', sans-serif; font-size: 22px;
-      margin-bottom: 8px; transition: color 0.2s;
+      font-family: 'Bebas Neue', sans-serif; font-size: 17px;
+      line-height: 1.2; color: var(--black);
     }
+    .utp-card.blue .utp-card-title,
+    .utp-card.dark .utp-card-title { color: var(--white); }
     .utp-card-desc {
-      font-size: 14px; line-height: 1.65; color: #555;
-      transition: color 0.2s;
+      font-size: 12px; line-height: 1.55; color: #666;
     }
+    .utp-card.blue .utp-card-desc { color: rgba(255,255,255,0.75); }
+    .utp-card.dark .utp-card-desc { color: rgba(255,255,255,0.5); }
 
     /* CATALOG CARDS */
     .catalog-grid {
@@ -421,7 +412,8 @@
     @media (max-width: 1024px) {
       .hero { grid-template-columns: 1fr; padding: 60px 32px 40px; gap: 40px; }
       .hero-right { max-width: 500px; }
-      .utp-grid { grid-template-columns: 1fr 1fr; }
+      .utp-grid { grid-template-columns: repeat(3, 1fr); }
+      .utp-card:nth-child(n) { grid-column: auto; grid-row: auto; }
       .catalog-grid { grid-template-columns: 1fr 1fr; }
       .steps-grid { grid-template-columns: 1fr 1fr; }
       .cta-band { flex-direction: column; text-align: center; margin: 0 32px 60px; padding: 48px 40px; }
@@ -452,7 +444,8 @@
       .section { padding: 52px 20px; }
       h2.section-title { font-size: clamp(28px, 8vw, 44px); }
       /* GRIDS */
-      .utp-grid { grid-template-columns: 1fr; gap: 10px; }
+      .utp-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .utp-card:nth-child(n) { grid-column: auto; grid-row: auto; }
       .catalog-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
       .steps-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
       /* CATALOG CARDS */
@@ -818,9 +811,7 @@
 </nav>
 
 <!-- HERO -->
-<div class="hero-section">
-  <div class="hero-bg"></div>
-  <section class="hero">
+<section class="hero">
   <div class="hero-left">
     <div class="hero-tag"><span><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></span> Трикотажная фабрика — Санкт-Петербург</div>
     <h1 class="hero-title">
@@ -867,7 +858,6 @@
     </ul>
   </div>
 </section>
-</div><!-- /hero-section -->
 
 <!-- TICKER -->
 <div class="ticker">
@@ -892,33 +882,33 @@
   <div class="section-label">Почему выбирают нас</div>
   <h2 class="section-title">ЧЕМ МЫ <span class="accent">ОТЛИЧАЕМСЯ</span></h2>
   <div class="utp-grid">
-    <div class="utp-card">
-      <div class="utp-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
+    <div class="utp-card gray">
+      <div class="utp-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
       <div class="utp-card-title">ОТКРЫТОЕ ПРОИЗВОДСТВО</div>
       <p class="utp-card-desc">Приезжайте и смотрите сами — мы не скрываем, как работаем</p>
     </div>
-    <div class="utp-card">
-      <div class="utp-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
+    <div class="utp-card blue">
+      <div class="utp-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
       <div class="utp-card-title">КАЧЕСТВО КАК В ОБРАЗЦЕ</div>
       <p class="utp-card-desc">Каждая партия проходит ОТК перед отправкой</p>
     </div>
-    <div class="utp-card">
-      <div class="utp-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
+    <div class="utp-card dark">
+      <div class="utp-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
       <div class="utp-card-title">ОТ 100 ЕДИНИЦ</div>
       <p class="utp-card-desc">Подходим молодым брендам — не требуем огромных тиражей сразу</p>
     </div>
-    <div class="utp-card">
-      <div class="utp-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
+    <div class="utp-card gray">
+      <div class="utp-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
       <div class="utp-card-title">СРОКИ 7–21 ДЕНЬ</div>
       <p class="utp-card-desc">Понятные дедлайны на старте, без размытых «договоримся»</p>
     </div>
-    <div class="utp-card">
-      <div class="utp-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
+    <div class="utp-card blue">
+      <div class="utp-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
       <div class="utp-card-title">ТОЛЬКО ТРИКОТАЖ</div>
       <p class="utp-card-desc">Специализация, а не «шьём всё» — знаем материал глубоко</p>
     </div>
-    <div class="utp-card">
-      <div class="utp-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
+    <div class="utp-card dark">
+      <div class="utp-card-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg></div>
       <div class="utp-card-title">СЕРТИФИЦИРОВАННОЕ ПРОИЗВОДСТВО</div>
       <p class="utp-card-desc">Работаем с документами: сертификаты ГОСТ на ткани, декларации соответствия, сопроводительные документы для маркетплейсов</p>
     </div>
@@ -1053,9 +1043,9 @@
   <div class="video-grid">
     <div style="border-radius: var(--radius); overflow: hidden; background: var(--black); aspect-ratio: 16/9; position: relative;">
       <iframe
-        src="https://www.youtube.com/embed/live_stream?channel=ВСТАВЬТЕ_ID_КАНАЛА"
+        src="https://vk.com/video_ext.php?oid=-114798101&id=456239311&hd=2"
         style="width:100%; height:100%; position:absolute; top:0; left:0; border:none;"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
         allowfullscreen>
       </iframe>
     </div>
