@@ -37,6 +37,18 @@
     .nav-links li a:hover { background: var(--gray); }
     .nav-cta { background: var(--blue) !important; color: var(--white) !important; border-radius: 8px !important; }
     .nav-cta:hover { background: var(--black) !important; }
+    .nav-contacts {
+      display: flex; align-items: center; gap: 4px; margin-right: 8px;
+      border-right: 1px solid var(--gray-mid); padding-right: 12px;
+    }
+    .nav-contact-item {
+      display: flex; align-items: center;
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+      padding: 8px 10px; border-radius: 8px; transition: background 0.15s;
+    }
+    .nav-contact-item:hover { background: var(--gray); }
+    .nav-contact-value { color: var(--text); text-decoration: none; }
+    @media (max-width: 1024px) { .nav-contacts { display: none; } }
     .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 8px; cursor: pointer; }
     .burger span { display: block; width: 24px; height: 2px; background: var(--black); border-radius: 2px; }
     .mobile-nav {
@@ -55,10 +67,26 @@
     .mobile-nav.open { display: flex; }
 
     .page-hero {
-      margin-top: 64px; background: var(--black);
+      margin-top: 64px;
+      position: relative;
       padding: 64px 40px;
       display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      overflow: hidden;
     }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url('hero-bg.jpg');
+      background-size: cover; background-position: center 40%;
+      z-index: 0;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.82);
+      z-index: 1;
+    }
+    .page-hero > * { position: relative; z-index: 2; }
     .hero-tag {
       font-family: 'IBM Plex Mono', monospace; font-size: 11px;
       text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4);
@@ -297,6 +325,16 @@
     <li><a href="catalog.html">Каталог</a></li>
     <li><a href="about.html">О фабрике</a></li>
     <li><a href="contacts.html">Контакты</a></li>
+    <li>
+      <div class="nav-contacts">
+        <div class="nav-contact-item">
+          <a href="tel:+78124072715" class="nav-contact-value">+7 (812) 407-27-15</a>
+        </div>
+        <div class="nav-contact-item">
+          <a id="nav-email" href="#" class="nav-contact-value"></a>
+        </div>
+      </div>
+    </li>
     <li><a href="zayavka.html" class="nav-cta">Заявка</a></li>
   </ul>
   <button class="burger" id="burger"><span></span><span></span><span></span></button>
@@ -580,9 +618,67 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!document.querySelector('[name="name"]').value.trim() || !document.querySelector('[name="phone"]').value.trim()) {
       alert('Пожалуйста, заполните имя и телефон'); return;
     }
+
+    // Собираем все данные формы
+    var formData = {
+      name:       document.querySelector('[name="name"]').value.trim(),
+      phone:      document.querySelector('[name="phone"]').value.trim(),
+      company:    document.querySelector('[name="company"]').value.trim(),
+      email:      document.querySelector('[name="email"]').value.trim(),
+      source:     document.querySelector('[name="source"]').value.trim(),
+      categories: document.getElementById('categoriesInput').value,
+      volume:     document.getElementById('volumeInput').value,
+      model:      document.getElementById('modelInput').value,
+      comment:    document.querySelector('[name="comment"]').value.trim()
+    };
+
     var btn = document.getElementById('submitBtn');
     btn.classList.add('loading'); btn.textContent = '✳ ОТПРАВЛЯЕМ...';
+
+    // ─── БИТРИКС24 WEBHOOK ───────────────────────────────────────────
+    // Замените BITRIX_WEBHOOK_URL на реальный URL вашего вебхука
+    var BITRIX_WEBHOOK_URL = 'ВСТАВЬТЕ_URL_WEBHOOK_БИТРИКС24';
+
+    var bitrixFields = {
+      'fields[TITLE]':    'Заявка с сайта: ' + formData.name,
+      'fields[NAME]':     formData.name,
+      'fields[PHONE][0][VALUE]': formData.phone,
+      'fields[PHONE][0][VALUE_TYPE]': 'WORK',
+      'fields[EMAIL][0][VALUE]': formData.email,
+      'fields[EMAIL][0][VALUE_TYPE]': 'WORK',
+      'fields[COMPANY_TITLE]': formData.company,
+      'fields[COMMENTS]': [
+        'Категории: ' + (formData.categories || 'не указано'),
+        'Тираж: ' + (formData.volume || 'не указано'),
+        'Модель: ' + (formData.model || 'не указано'),
+        'Источник: ' + (formData.source || 'не указано'),
+        'Комментарий: ' + (formData.comment || 'не указано')
+      ].join('\n'),
+      'fields[SOURCE_ID]': 'WEB',
+      'fields[OPENED]': 'Y'
+    };
+
+    var params = Object.keys(bitrixFields)
+      .map(function(k) { return encodeURIComponent(k) + '=' + encodeURIComponent(bitrixFields[k]); })
+      .join('&');
+
+    if (BITRIX_WEBHOOK_URL !== 'ВСТАВЬТЕ_URL_WEBHOOK_БИТРИКС24') {
+      fetch(BITRIX_WEBHOOK_URL + 'crm.lead.add.json?' + params, { method: 'POST' })
+        .catch(function(err) { console.warn('Bitrix webhook error:', err); });
+    }
+    // ─────────────────────────────────────────────────────────────────
+
     setTimeout(function() {
       document.getElementById('formBody').style.display = 'none';
       document.getElementById('successScreen').classList.add('visible');
-  
+    }, 600);
+  });
+
+  // Email через JS
+  var navEmail = document.getElementById('nav-email');
+  if (navEmail) { navEmail.href = 'mailto:fabrika@pnhd.ru'; navEmail.textContent = 'fabrika@pnhd.ru'; }
+
+});
+</script>
+</body>
+</html>
