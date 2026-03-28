@@ -1506,12 +1506,29 @@ document.addEventListener('DOMContentLoaded', function() {
   if (navEmail) { navEmail.href = 'mailto:fabrika@pnhd.ru'; navEmail.textContent = 'fabrika@pnhd.ru'; }
 
   // Быстрая форма
+  var BITRIX_WEBHOOK = 'https://pinhead.bitrix24.ru/rest/8542/l7blfw71l634jzij/';
+
+  function sendToBitrix(name, phone, source) {
+    var params = [
+      'fields[TITLE]=' + encodeURIComponent('Заявка с сайта: ' + name),
+      'fields[NAME]=' + encodeURIComponent(name),
+      'fields[PHONE][0][VALUE]=' + encodeURIComponent(phone),
+      'fields[PHONE][0][VALUE_TYPE]=WORK',
+      'fields[COMMENTS]=' + encodeURIComponent('Источник формы: ' + source),
+      'fields[SOURCE_ID]=WEB',
+      'fields[OPENED]=Y'
+    ].join('&');
+    fetch(BITRIX_WEBHOOK + 'crm.lead.add.json?' + params, { method: 'POST' })
+      .catch(function(err) { console.warn('Bitrix error:', err); });
+  }
+
   var quickSubmit = document.getElementById('quick-submit');
   if (quickSubmit) {
     quickSubmit.addEventListener('click', function() {
       var name = document.getElementById('quick-name').value.trim();
       var phone = document.getElementById('quick-phone').value.trim();
       if (!name || !phone) { alert('Пожалуйста, заполните имя и телефон'); return; }
+      sendToBitrix(name, phone, 'Быстрая форма (index)');
       document.getElementById('quick-form-box').style.display = 'none';
       document.getElementById('quick-success').style.display = 'block';
     });
@@ -1559,6 +1576,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var name = document.getElementById('popup-name').value.trim();
       var phone = document.getElementById('popup-phone').value.trim();
       if (!name || !phone) { alert('Пожалуйста, заполните имя и телефон'); return; }
+      sendToBitrix(name, phone, 'Попап (index)');
       document.getElementById('popup-form').style.display = 'none';
       document.getElementById('popup-success').style.display = 'block';
       sessionStorage.setItem('popup_shown', '1');

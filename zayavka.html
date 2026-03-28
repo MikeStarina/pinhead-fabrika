@@ -636,8 +636,7 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.classList.add('loading'); btn.textContent = '✳ ОТПРАВЛЯЕМ...';
 
     // ─── БИТРИКС24 WEBHOOK ───────────────────────────────────────────
-    // Замените BITRIX_WEBHOOK_URL на реальный URL вашего вебхука
-    var BITRIX_WEBHOOK_URL = 'ВСТАВЬТЕ_URL_WEBHOOK_БИТРИКС24';
+    var BITRIX_WEBHOOK_URL = 'https://pinhead.bitrix24.ru/rest/8542/l7blfw71l634jzij/';
 
     var bitrixFields = {
       'fields[TITLE]':    'Заявка с сайта: ' + formData.name,
@@ -662,10 +661,8 @@ document.addEventListener('DOMContentLoaded', function() {
       .map(function(k) { return encodeURIComponent(k) + '=' + encodeURIComponent(bitrixFields[k]); })
       .join('&');
 
-    if (BITRIX_WEBHOOK_URL !== 'ВСТАВЬТЕ_URL_WEBHOOK_БИТРИКС24') {
-      fetch(BITRIX_WEBHOOK_URL + 'crm.lead.add.json?' + params, { method: 'POST' })
-        .catch(function(err) { console.warn('Bitrix webhook error:', err); });
-    }
+    fetch(BITRIX_WEBHOOK_URL + 'crm.lead.add.json?' + params, { method: 'POST' })
+      .catch(function(err) { console.warn('Bitrix webhook error:', err); });
     // ─────────────────────────────────────────────────────────────────
 
     setTimeout(function() {
