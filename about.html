@@ -227,7 +227,7 @@
       transition: background 0.2s, transform 0.2s, color 0.2s;
     }
     .sew-item:hover { background: var(--black); color: var(--white); transform: translateY(-2px); }
-    .sew-arrow { font-size: 18px; color: var(--blue); transition: transform 0.15s; }
+    .sew-arrow { color: var(--blue); transition: transform 0.15s; flex-shrink: 0; display: flex; align-items: center; }
     .sew-item:hover .sew-arrow { transform: translate(3px, -3px); }
 
     /* NOT SEW */
@@ -327,8 +327,33 @@
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .sew-grid { grid-template-columns: 1fr 1fr; }
       .cycle-grid, .cycle-row2 { grid-template-columns: 1fr 1fr; }
+      .cycle-card { min-width: 0; width: 100%; }
       .cta-band { margin: 0 20px 48px; padding: 36px 24px; }
       footer { padding: 28px 20px; border-radius: 12px 12px 0 0; }
+      .sew-item { font-size: 15px; padding: 18px 16px; }
+      .sew-arrow { font-size: 14px; flex-shrink: 0; }
+    }
+
+    /* PREHEADER */
+    .preheader {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 101;
+      background: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 20px; height: 36px;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .preheader:hover { background: #1410c8; }
+    .preheader-text {
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--white); white-space: nowrap; overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .preheader-text span { opacity: 0.65; margin-right: 8px; }
+    nav { top: 36px !important; }
+    .page-hero { margin-top: calc(64px + 36px) !important; }
+    @media (max-width: 768px) {
+      .preheader-text { font-size: 10px; letter-spacing: 0.05em; }
     }
   </style>
 <!-- Yandex.Metrika counter -->
@@ -346,6 +371,13 @@
 </head>
 <body>
 <noscript><div><img src="https://mc.yandex.ru/watch/107727358" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<!-- PREHEADER -->
+<div class="preheader" id="preheaderBar">
+  <div class="preheader-text">
+    <span>✱</span>Открытая кухня: приедь и посмотри как шьётся твой бренд →
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -514,15 +546,13 @@
   <div class="section-label">03 / Ассортимент</div>
   <h2 class="section-title">ЧТО МЫ <span class="accent">ШЬЁМ</span></h2>
   <div class="sew-grid">
-    <a href="poshiv-hudi.html" class="sew-item"><span>ХУДИ</span><span class="sew-arrow">↗</span></a>
-    <a href="poshiv-futbolok.html" class="sew-item"><span>ФУТБОЛКИ</span><span class="sew-arrow">↗</span></a>
-    <a href="poshiv-svitshotov.html" class="sew-item"><span>СВИТШОТЫ</span><span class="sew-arrow">↗</span></a>
-    <a href="poshiv-sportivnyh-kostumov.html" class="sew-item"><span>СПОРТИВНЫЕ КОСТЮМЫ</span><span class="sew-arrow">↗</span></a>
-    <a href="poshiv-domashnej-odezhdy.html" class="sew-item"><span>ДОМАШНЯЯ ОДЕЖДА</span><span class="sew-arrow">↗</span></a>
-    <a href="poshiv-detskoj-odezhdy.html" class="sew-item"><span>ДЕТСКАЯ ОДЕЖДА</span><span class="sew-arrow">↗</span></a>
-    <a href="catalog.html" class="sew-item"><span>LOUNGE WEAR</span><span class="sew-arrow">↗</span></a>
-    <a href="catalog.html" class="sew-item"><span>БАЗОВЫЕ ВЕЩИ</span><span class="sew-arrow">↗</span></a>
-    <a href="catalog.html" class="sew-item"><span>МАРКЕТПЛЕЙС БРЕНДЫ</span><span class="sew-arrow">↗</span></a>
+    <a href="poshiv-hudi.html" class="sew-item"><span>ХУДИ</span><span class="sew-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+    <a href="poshiv-futbolok.html" class="sew-item"><span>ФУТБОЛКИ</span><span class="sew-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+    <a href="poshiv-svitshotov.html" class="sew-item"><span>СВИТШОТЫ</span><span class="sew-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+    <a href="poshiv-sportivnyh-kostumov.html" class="sew-item"><span>СПОРТИВНЫЕ КОСТЮМЫ</span><span class="sew-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+    <a href="poshiv-domashnej-odezhdy.html" class="sew-item"><span>ДОМАШНЯЯ ОДЕЖДА</span><span class="sew-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+    <a href="poshiv-detskoj-odezhdy.html" class="sew-item"><span>ДЕТСКАЯ ОДЕЖДА</span><span class="sew-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
+    <a href="catalog.html" class="sew-item"><span>БАЗОВЫЕ ВЕЩИ</span><span class="sew-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
   </div>
 </section>
 
@@ -565,7 +595,7 @@
     </div>
     <div class="client-card">
       <div class="client-icon">🏪</div>
-      <h3 class="client-title">СОБСТВЕННЫЙ БРЕНД (PRIVATE LABEL)</h3>
+      <h3 class="client-title">СОБСТВЕННЫЙ БРЕНД</h3>
       <p class="client-desc">Компании, которые делают одежду под собственными брендами для магазинов. Решения принимают закупщики и продакт-менеджеры. Проекты часто идут через тендеры.</p>
       <span class="client-range"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px;"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg>Тираж: 1000–10000 единиц</span>
     </div>
@@ -592,7 +622,7 @@
 <path d="M898.541 145.413H871.471L866.856 112.101H854.734L850.07 145.413H823L843.432 21.3237H878.072L898.541 145.413ZM864.66 94.8785L860.73 57.8426L857.01 94.8785H864.66Z" fill="white"/><path d="M907.346 145.023V20.9341H957.908V36.8576H933.972V66.7104C947.556 66.7104 956.909 68.0091 962.029 70.6066C967.143 73.2041 969.703 79.2301 969.703 88.6906V123.043C969.703 130.14 967.581 135.575 963.331 139.354C959.08 143.133 950.308 145.023 937.007 145.023H907.346ZM943.077 120.71V90.9435C943.077 86.6163 940.363 84.4559 934.934 84.4559H933.972V127.29C940.042 127.345 943.077 125.154 943.077 120.716V120.71Z" fill="white"/><path d="M1003.26 99.333V145.023H976.637V20.9341H1005.34C1016.73 20.9341 1025.19 22.3744 1030.71 25.2612C1036.23 28.148 1038.99 34.0324 1038.99 42.9143V77.3527C1038.99 85.4838 1036.74 91.2389 1032.23 94.6181C1027.72 97.9912 1018.06 99.5669 1003.26 99.333H1003.26ZM1012.37 75.0199V45.2533C1012.37 40.8708 1009.33 38.6796 1003.26 38.6796V81.5998C1009.33 81.5998 1012.37 79.4086 1012.37 75.0261V75.0199Z" fill="white"/><path d="M1049.16 144.745V20.6558H1071.97V77.2468L1089.25 20.6558H1118.63V144.745H1095.82V78.6317L1077.24 144.745H1049.16Z" fill="white"/><path d="M1198.16 145.023H1169.05L1153.92 96.0768V145.023H1128.34V20.934H1153.92V64.1805L1163.27 33.226C1165.93 24.4609 1171.68 20.0723 1180.54 20.0723C1186.04 20.0723 1190.18 20.417 1192.96 21.1125V37.6392C1188.27 37.6392 1185.03 40.5814 1183.24 46.4658L1174.13 76.0601L1198.16 145.023Z" fill="white"/><path d="M1275 145.023H1247.93L1243.32 111.711H1231.19L1226.53 145.023H1199.46L1219.89 20.9341H1254.53L1275 145.023ZM1241.12 94.4889L1237.19 57.4529L1233.47 94.4889H1241.12Z" fill="white"/>
     </svg>
   </div>
-  <span>Санкт-Петербург · fabrika&#64;pnhd.ru · +7 (812) 407-27-15</span>
+  <span>Санкт-Петербург · <span id="footer-email-about"></span> · +7 (812) 407-27-15</span>
   <span>© 2026 ПИНХЭД ФАБРИКА</span>
 </footer>
 
@@ -634,33 +664,62 @@ document.addEventListener('DOMContentLoaded', function() {
   // Email через JS
   var navEmail = document.getElementById('nav-email');
   if (navEmail) { navEmail.href = 'mailto:fabrika@pnhd.ru'; navEmail.textContent = 'fabrika@pnhd.ru'; }
+  var footerEmail = document.getElementById('footer-email-about');
+  if (footerEmail) { footerEmail.innerHTML = '<a href="mailto:fabrika@pnhd.ru" style="color:inherit;text-decoration:none;">fabrika@pnhd.ru</a>'; }
 
   // Burger menu
   var burger = document.getElementById('burger');
   var mobileNav = document.getElementById('mobile-nav');
   if (burger) burger.addEventListener('click', function() { mobileNav.classList.toggle('open'); });
 
-  // Kitchen popup
-  var kitchenBtn = document.getElementById('kitchenPopupBtn');
+  // Kitchen popup (shared between preheader and section button)
   var kitchenPopup = document.getElementById('kitchenPopup');
-  if (kitchenBtn) {
-    kitchenBtn.addEventListener('click', function() {
-      kitchenPopup.style.display = 'flex';
-    });
+  function openKitchenPopup() {
+    kitchenPopup.style.display = 'flex';
+    document.getElementById('kitchen-form-box').style.display = 'flex';
+    document.getElementById('kitchen-success').style.display = 'none';
+    document.getElementById('kitchen-name').value = '';
+    document.getElementById('kitchen-phone').value = '';
   }
+
+  var kitchenBtn = document.getElementById('kitchenPopupBtn');
+  if (kitchenBtn) kitchenBtn.addEventListener('click', openKitchenPopup);
+
+  var preheaderBar = document.getElementById('preheaderBar');
+  if (preheaderBar) preheaderBar.addEventListener('click', openKitchenPopup);
+
   kitchenPopup.addEventListener('click', function(e) {
     if (e.target === kitchenPopup) kitchenPopup.style.display = 'none';
   });
 
-  // Kitchen form submit
+  // Kitchen form submit → Bitrix24
+  var WEBHOOK = 'https://pinhead.bitrix24.ru/rest/1/qvtu7f8xppb5cxcl/';
   var kitchenSubmit = document.getElementById('kitchen-submit');
   if (kitchenSubmit) {
     kitchenSubmit.addEventListener('click', function() {
       var name = document.getElementById('kitchen-name').value.trim();
       var phone = document.getElementById('kitchen-phone').value.trim();
       if (!name || !phone) { alert('Пожалуйста, заполните имя и телефон'); return; }
-      document.getElementById('kitchen-form-box').style.display = 'none';
-      document.getElementById('kitchen-success').style.display = 'block';
+
+      kitchenSubmit.disabled = true;
+      kitchenSubmit.textContent = 'Отправляем...';
+
+      var params = 'fields[TITLE]=Запись на экскурсию — О фабрике'
+        + '&fields[NAME]=' + encodeURIComponent(name)
+        + '&fields[PHONE][0][VALUE]=' + encodeURIComponent(phone)
+        + '&fields[PHONE][0][VALUE_TYPE]=WORK'
+        + '&fields[SOURCE_ID]=WEB'
+        + '&fields[COMMENTS]=Форма: Открытая кухня (страница О фабрике)';
+
+      fetch(WEBHOOK + 'crm.lead.add.json?' + params, { method: 'GET' })
+        .then(function() {
+          document.getElementById('kitchen-form-box').style.display = 'none';
+          document.getElementById('kitchen-success').style.display = 'block';
+        })
+        .catch(function() {
+          document.getElementById('kitchen-form-box').style.display = 'none';
+          document.getElementById('kitchen-success').style.display = 'block';
+        });
     });
   }
 
