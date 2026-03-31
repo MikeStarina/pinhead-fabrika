@@ -1,5 +1,10 @@
 Options -MultiViews
 RewriteEngine On
+
+# 301 со старых адресов *.html на чистые URL (если файла с таким именем уже нет)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)\.html$ /$1 [R=301,L]
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.html [NC,L]
+RewriteRule ^([^.]+)$ $1/index.html [NC,L]
