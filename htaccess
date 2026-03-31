@@ -8,3 +8,10 @@ RewriteRule ^(.+)\.html$ /$1 [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^.]+)$ $1/index.html [NC,L]
+
+# Favicon: явный Cache-Control (если включён mod_headers)
+<IfModule mod_headers.c>
+  <FilesMatch "^favicon\.(svg|png|ico)$">
+    Header set Cache-Control "public, max-age=604800, must-revalidate"
+  </FilesMatch>
+</IfModule>
