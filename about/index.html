@@ -76,37 +76,73 @@
     .mobile-nav a:last-child { border-bottom: none; }
     .mobile-nav.open { display: flex; }
 
-    /* HERO */
-    .page-hero {
-      margin-top: 64px;
-      padding: 72px 40px 64px;
-      max-width: 1400px; margin-left: auto; margin-right: auto;
-      margin-top: 64px;
+    /* ABOUT BANNER + HERO */
+    .about-banner-wrap {
+      margin-top: calc(64px + 36px);
+      position: relative;
+    }
+    .about-banner {
+      position: relative;
+      min-height: min(52vh, 560px);
+      background: var(--black) url('../factory-photo.jpg') center/cover no-repeat;
+      overflow: hidden;
+    }
+    .about-banner::after {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        linear-gradient(180deg, rgba(6,6,10,0.55) 0%, transparent 28%),
+        linear-gradient(160deg, rgba(6,6,10,0.94) 0%, rgba(6,6,10,0.72) 42%, rgba(6,6,10,0.82) 100%);
+    }
+    .about-banner-inner {
+      position: relative; z-index: 1;
+      max-width: 1400px; margin: 0 auto;
+      padding: 72px 40px 120px;
       display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end;
     }
-    .breadcrumb {
-      font-family: 'IBM Plex Mono', monospace; font-size: 11px;
-      text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted);
-      margin-bottom: 24px;
+    .about-banner .breadcrumb {
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.88); margin-bottom: 24px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9);
     }
-    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
-    .breadcrumb a:hover { color: var(--blue); }
-    h1.page-title {
+    .about-banner .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+    .about-banner .breadcrumb a:hover { color: #a8a4ff; }
+    .about-banner h1.page-title {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(64px, 7vw, 112px); line-height: 0.92;
+      color: var(--white);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.85), 0 4px 24px rgba(0,0,0,0.5);
     }
-    h1.page-title .accent { color: var(--blue); }
-    .page-hero-lead {
-      font-size: 18px; line-height: 1.7; color: #444; margin-bottom: 28px;
+    .about-banner h1.page-title .accent { color: var(--blue); filter: drop-shadow(0 1px 3px rgba(0,0,0,0.75)); }
+    .about-banner .page-hero-lead {
+      font-size: 18px; line-height: 1.7; font-weight: 500;
+      color: rgba(255,255,255,0.96); margin-bottom: 28px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.85);
     }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag {
-      font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    .about-banner .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .about-banner .tag {
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
       text-transform: uppercase; letter-spacing: 0.07em;
-      background: var(--gray); color: var(--text-muted);
-      padding: 6px 14px; border-radius: 100px;
+      background: rgba(0,0,0,0.58); color: #fff;
+      border: 1px solid rgba(255,255,255,0.28);
+      padding: 7px 14px; border-radius: 100px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.35);
     }
-    .tag-blue { background: var(--blue-light); color: var(--blue); }
+    .about-banner .tag-blue {
+      background: var(--blue); color: #fff;
+      border-color: rgba(255,255,255,0.35);
+      box-shadow: 0 2px 8px rgba(29,25,234,0.45);
+    }
+    .about-stats-wrap {
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 40px 40px;
+      position: relative; z-index: 2;
+    }
+    .about-stats-wrap .stats-grid {
+      margin-top: -88px;
+      filter: drop-shadow(0 16px 40px rgba(0,0,0,0.12));
+    }
 
     /* SECTIONS */
     .section { padding: 72px 40px; max-width: 1400px; margin: 0 auto; }
@@ -127,6 +163,7 @@
     }
     .stat-card {
       background: var(--gray); border-radius: var(--radius); padding: 32px 28px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
     }
     .stat-card:first-child { background: var(--black); }
     .stat-card:first-child .stat-num { color: var(--blue); }
@@ -270,26 +307,81 @@
       padding: 5px 12px; border-radius: 100px; transition: all 0.2s;
     }
 
-    /* CTA */
-    .cta-band {
-      background: var(--black); border-radius: var(--radius-lg);
-      padding: 64px 56px; margin: 0 40px 80px;
-      display: flex; justify-content: space-between; align-items: center; gap: 40px;
+    /* QUICK FORM */
+    .quick-form-section {
+      background: var(--black);
+      padding: 80px 40px;
+      margin: 0;
     }
-    .cta-band h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(36px, 4vw, 64px); color: var(--white); line-height: 1;
+    .quick-form-inner {
+      max-width: 960px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center;
     }
-    .cta-band h2 .accent { color: var(--blue); }
-    .cta-band p { color: rgba(255,255,255,0.5); font-size: 15px; margin-top: 8px; max-width: 400px; }
-    .btn-white {
-      background: var(--white); color: var(--black);
+    .quick-form-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
+    .quick-form-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 4vw, 60px); line-height: 1.0; color: var(--white); margin-bottom: 16px; }
+    .quick-form-title .accent { color: var(--blue); }
+    .quick-form-desc { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.45); max-width: 400px; }
+    .quick-form-box { display: flex; flex-direction: column; gap: 12px; }
+    .quick-form-field input {
+      width: 100%; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 16px 20px;
+      font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; color: var(--white);
+      outline: none; transition: border-color 0.15s;
+    }
+    .quick-form-field input::placeholder { color: rgba(255,255,255,0.3); }
+    .quick-form-field input:focus { border-color: var(--blue); }
+    .quick-form-btn {
+      width: 100%; background: var(--blue); color: var(--white); border: none; cursor: pointer;
       font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
       text-transform: uppercase; letter-spacing: 0.08em;
-      padding: 18px 36px; text-decoration: none; border-radius: 10px;
-      white-space: nowrap; transition: background 0.15s, transform 0.1s;
+      padding: 18px; border-radius: 12px; margin-top: 4px;
+      transition: background 0.15s, transform 0.1s;
     }
-    .btn-white:hover { background: var(--blue); color: var(--white); transform: translateY(-1px); }
+    .quick-form-btn:hover { background: #1612c5; transform: translateY(-1px); }
+    .quick-form-note { font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.2); text-align: center; margin-top: 4px; }
+    .quick-form-success { display: none; text-align: center; padding: 32px 0; }
+    .quick-form-success-icon { font-size: 40px; margin-bottom: 16px; }
+    .quick-form-success h3 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--white); margin-bottom: 8px; }
+    .quick-form-success p { font-size: 14px; color: rgba(255,255,255,0.4); }
+
+    /* FACTORY GALLERY */
+    .factory-gallery-section {
+      padding: 72px 0 72px;
+    }
+    .factory-gallery-header {
+      padding: 0 40px;
+      margin-bottom: 32px;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .factory-scroll-track {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 0 40px 16px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .factory-scroll-track::-webkit-scrollbar { display: none; }
+    .factory-scroll-item {
+      flex: 0 0 auto;
+      width: 360px;
+      height: 480px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+    .factory-scroll-item.tall { height: 560px; }
+    .factory-scroll-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .factory-scroll-item:hover img { transform: scale(1.04); }
 
     /* FOOTER */
     footer {
@@ -309,26 +401,36 @@
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 1024px) {
-      .page-hero { grid-template-columns: 1fr; gap: 32px; padding: 56px 32px 48px; }
+      .about-banner-inner { grid-template-columns: 1fr; gap: 32px; padding: 56px 32px 100px; }
+      .about-stats-wrap { padding: 0 32px 32px; }
+      .about-stats-wrap .stats-grid { margin-top: -56px; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
+      .quick-form-inner { grid-template-columns: 1fr; gap: 40px; }
       .kitchen-grid { grid-template-columns: 1fr; }
       .cycle-grid, .cycle-row2 { grid-template-columns: 1fr 1fr; }
       .clients-grid { grid-template-columns: 1fr; }
       .not-sew { grid-template-columns: 1fr; gap: 24px; }
-      .cta-band { flex-direction: column; text-align: center; margin: 0 32px 60px; padding: 48px 40px; }
       .section { padding: 56px 32px; }
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; }
       .burger { display: flex; }
-      .page-hero { padding: 40px 20px 32px; }
+      .about-banner { min-height: min(70vh, 480px); }
+      .about-banner-inner { padding: 40px 20px 88px; gap: 28px; }
+      .about-stats-wrap { padding: 0 20px 28px; }
+      .about-stats-wrap .stats-grid { margin-top: -36px; }
       .section { padding: 48px 20px; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .sew-grid { grid-template-columns: 1fr 1fr; }
       .cycle-grid, .cycle-row2 { grid-template-columns: 1fr 1fr; }
       .cycle-card { min-width: 0; width: 100%; }
-      .cta-band { margin: 0 20px 48px; padding: 36px 24px; }
+      .quick-form-section { padding: 60px 20px; }
+      .factory-gallery-section { padding: 48px 0; }
+      .factory-gallery-header { padding: 0 20px; }
+      .factory-scroll-track { padding: 0 20px 12px; gap: 8px; }
+      .factory-scroll-item { width: 280px; height: 380px; }
+      .factory-scroll-item.tall { height: 440px; }
       footer { padding: 28px 20px; border-radius: 12px 12px 0 0; }
       .sew-item { font-size: 15px; padding: 18px 16px; }
       .sew-arrow { font-size: 14px; flex-shrink: 0; }
@@ -351,7 +453,6 @@
     }
     .preheader-text span { opacity: 0.65; margin-right: 8px; }
     nav { top: 36px !important; }
-    .page-hero { margin-top: calc(64px + 36px) !important; }
     @media (max-width: 768px) {
       .preheader-text { font-size: 10px; letter-spacing: 0.05em; }
     }
@@ -426,26 +527,27 @@
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="page-hero">
-  <div>
-    <div class="breadcrumb"><a href="/">Главная</a> &nbsp;/&nbsp; О фабрике</div>
-    <h1 class="page-title">О <span class="accent" style="display:inline-flex;vertical-align:middle;"><svg width="0.7em" height="0.7em" viewBox="0 0 172 166" fill="currentColor"><path d="M627.535 57.8959L654.235 28.1662L668.387 39.6703L643.556 67.3257L694.631 54.6644L696.685 73.5178L638.96 87.8287L675.722 117.848L661.576 133.543L620.909 100.342L610.792 165.243H591.039L598.472 117.521L575.64 142.936L561.488 131.432L589.675 100.053L524.332 116.229L522.277 97.3754L595.166 79.3037L542.302 36.1557L556.448 20.4476L607.152 61.8476L616.801 0H636.567L627.541 57.8959H627.529H627.535Z" transform="translate(-516,0)"/></svg></span> ФАБРИКЕ</h1>
-  </div>
-  <div>
-    <p class="page-hero-lead">Мы — Pinhead Фабрика. Контрактное производство трикотажной одежды в Санкт-Петербурге. Шьём для брендов — не для себя.</p>
-    <div class="hero-tags">
-      <span class="tag tag-blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px;"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg>Санкт-Петербург</span>
-      <span class="tag">Трикотаж</span>
-      <span class="tag">От 100 единиц</span>
-      <span class="tag">Открытое производство</span>
-      <span class="tag">Полный цикл</span>
+<!-- BANNER + STATS -->
+<div class="about-banner-wrap fade-up">
+  <div class="about-banner">
+    <div class="about-banner-inner">
+      <div>
+        <div class="breadcrumb"><a href="/">Главная</a> &nbsp;/&nbsp; О фабрике</div>
+        <h1 class="page-title">О <span class="accent" style="display:inline-flex;vertical-align:middle;"><svg width="0.7em" height="0.7em" viewBox="0 0 172 166" fill="currentColor"><path d="M627.535 57.8959L654.235 28.1662L668.387 39.6703L643.556 67.3257L694.631 54.6644L696.685 73.5178L638.96 87.8287L675.722 117.848L661.576 133.543L620.909 100.342L610.792 165.243H591.039L598.472 117.521L575.64 142.936L561.488 131.432L589.675 100.053L524.332 116.229L522.277 97.3754L595.166 79.3037L542.302 36.1557L556.448 20.4476L607.152 61.8476L616.801 0H636.567L627.541 57.8959H627.529H627.535Z" transform="translate(-516,0)"/></svg></span> ФАБРИКЕ</h1>
+      </div>
+      <div>
+        <p class="page-hero-lead">Мы — Pinhead Фабрика. Контрактное производство трикотажной одежды в Санкт-Петербурге. Шьём для брендов — не для себя.</p>
+        <div class="hero-tags">
+          <span class="tag tag-blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px;"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg>Санкт-Петербург</span>
+          <span class="tag">Трикотаж</span>
+          <span class="tag">От 100 единиц</span>
+          <span class="tag">Открытое производство</span>
+          <span class="tag">Полный цикл</span>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
-<!-- STATS -->
-<section class="section fade-up" style="padding-top: 0;">
+  <div class="about-stats-wrap">
   <div class="stats-grid">
     <div class="stat-card">
       <div class="stat-num">100</div>
@@ -468,7 +570,8 @@
       <div class="stat-note">Склад → раскрой → пошив → ОТК → брендирование → ВТО → упаковка → отправка.</div>
     </div>
   </div>
-</section>
+  </div>
+</div>
 
 <!-- OPEN KITCHEN -->
 <section class="section fade-up" style="padding-top: 0;">
@@ -541,6 +644,51 @@
   </div>
 </section>
 
+<!-- FACTORY GALLERY -->
+<section class="factory-gallery-section fade-up">
+  <div class="factory-gallery-header">
+    <h2 class="section-title" style="margin-bottom: 0;">ФОТО С НАШЕЙ <span class="accent">ФАБРИКИ</span></h2>
+  </div>
+  <div class="factory-scroll-track">
+    <div class="factory-scroll-item tall">
+      <img src="../fab-1.jpg" alt="Раскройный цех — пинхэд фабрика Санкт-Петербург" loading="lazy">
+    </div>
+    <div class="factory-scroll-item">
+      <img src="../fab-2.jpg" alt="Лекала и выкройки на производстве" loading="lazy">
+    </div>
+    <div class="factory-scroll-item">
+      <img src="../fab-3.jpg" alt="Склад трикотажных тканей" loading="lazy">
+    </div>
+    <div class="factory-scroll-item tall">
+      <img src="../fab-4.jpg" alt="Раскрой ткани ножом" loading="lazy">
+    </div>
+    <div class="factory-scroll-item">
+      <img src="../fab-5.jpg" alt="Склад готовой продукции" loading="lazy">
+    </div>
+    <div class="factory-scroll-item tall">
+      <img src="../fab-6.jpg" alt="Пошивочный цех — швейные машины" loading="lazy">
+    </div>
+    <div class="factory-scroll-item">
+      <img src="../fab-7.jpg" alt="Нитки для промышленных швейных машин" loading="lazy">
+    </div>
+    <div class="factory-scroll-item">
+      <img src="../fab-8.jpg" alt="Трафаретная печать на изделиях" loading="lazy">
+    </div>
+    <div class="factory-scroll-item tall">
+      <img src="../fab-9.jpg" alt="Принт-машина Printex Hurricane" loading="lazy">
+    </div>
+    <div class="factory-scroll-item">
+      <img src="../fab-10.jpg" alt="Цех трафаретной печати" loading="lazy">
+    </div>
+    <div class="factory-scroll-item tall">
+      <img src="../fab-11.jpg" alt="Промышленное оборудование для печати" loading="lazy">
+    </div>
+    <div class="factory-scroll-item">
+      <img src="../fab-12.jpg" alt="Раскрой деталей кроя" loading="lazy">
+    </div>
+  </div>
+</section>
+
 <!-- WHAT WE SEW -->
 <section class="section fade-up" style="padding-top: 0;">
   <div class="section-label">03 / Ассортимент</div>
@@ -602,14 +750,33 @@
   </div>
 </section>
 
-<!-- CTA -->
-<div class="cta-band fade-up">
-  <div>
-    <h2>ГОТОВЫ ЗАПУСТИТЬ<br><span class="accent">ПРОИЗВОДСТВО?</span></h2>
-    <p>Менеджер свяжется в течение одного рабочего дня и рассчитает стоимость партии.</p>
+<!-- QUICK CONTACT FORM -->
+<section class="quick-form-section fade-up">
+  <div class="quick-form-inner">
+    <div class="quick-form-left">
+      <div class="quick-form-label"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.5 10.5L21 7L15 13L23 12L15 11L21 17L13.5 13.5L12 22L10.5 13.5L3 17L9 11L1 12L9 13L3 7L10.5 10.5L12 2Z"/></svg> Обсудим ваш заказ</div>
+      <h2 class="quick-form-title">ХОТИТЕ<br>ОБСУДИТЬ<br><span class="accent">ВАШ ЗАКАЗ?</span></h2>
+      <p class="quick-form-desc">Оставьте контакты — свяжемся в течение 15 минут и ответим на все вопросы по тиражу, срокам и стоимости.</p>
+    </div>
+    <div class="quick-form-right">
+      <div class="quick-form-box" id="quick-form-box">
+        <div class="quick-form-field">
+          <input type="text" id="quick-name" placeholder="Ваше имя *">
+        </div>
+        <div class="quick-form-field">
+          <input type="tel" id="quick-phone" placeholder="Номер телефона *">
+        </div>
+        <button class="quick-form-btn" id="quick-submit">Жду звонка →</button>
+        <div class="quick-form-note">✱ Свяжемся в течение 15 минут</div>
+      </div>
+      <div class="quick-form-success" id="quick-success">
+        <div class="quick-form-success-icon">✳</div>
+        <h3>ОТЛИЧНО!</h3>
+        <p>Свяжемся с вами в течение 15 минут.</p>
+      </div>
+    </div>
   </div>
-  <a href="/zayavka" class="btn-white">Оставить заявку →</a>
-</div>
+</section>
 
 <!-- FOOTER -->
 <footer>
@@ -720,6 +887,35 @@ document.addEventListener('DOMContentLoaded', function() {
           document.getElementById('kitchen-form-box').style.display = 'none';
           document.getElementById('kitchen-success').style.display = 'block';
         });
+    });
+  }
+
+  // Быстрая форма внизу страницы (тот же webhook, что на главной)
+  var BITRIX_WEBHOOK = 'https://pinhead.bitrix24.ru/rest/8542/l7blfw71l634jzij/';
+
+  function sendToBitrix(name, phone, source) {
+    var params = [
+      'fields[TITLE]=' + encodeURIComponent('Перезвонить #фабрика — Заявка с сайта: ' + name),
+      'fields[NAME]=' + encodeURIComponent(name),
+      'fields[PHONE][0][VALUE]=' + encodeURIComponent(phone),
+      'fields[PHONE][0][VALUE_TYPE]=WORK',
+      'fields[COMMENTS]=' + encodeURIComponent('Источник формы: ' + source),
+      'fields[SOURCE_ID]=WEB',
+      'fields[OPENED]=Y'
+    ].join('&');
+    fetch(BITRIX_WEBHOOK + 'crm.lead.add.json?' + params, { method: 'POST' })
+      .catch(function(err) { console.warn('Bitrix error:', err); });
+  }
+
+  var quickSubmit = document.getElementById('quick-submit');
+  if (quickSubmit) {
+    quickSubmit.addEventListener('click', function() {
+      var name = document.getElementById('quick-name').value.trim();
+      var phone = document.getElementById('quick-phone').value.trim();
+      if (!name || !phone) { alert('Пожалуйста, заполните имя и телефон'); return; }
+      sendToBitrix(name, phone, 'Быстрая форма (about)');
+      document.getElementById('quick-form-box').style.display = 'none';
+      document.getElementById('quick-success').style.display = 'block';
     });
   }
 
