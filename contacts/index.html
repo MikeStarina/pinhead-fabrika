@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Контакты — ПИНХЭД ФАБРИКА, Санкт-Петербург</title>
+  <title>Наши контакты — ПИНХЭД ФАБРИКА, Санкт-Петербург</title>
   <meta name="description" content="Контакты трикотажной фабрики Пинхэд в Санкт-Петербурге. Телефон, email, Telegram. Приезжайте на производство — покажем изнутри." />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" href="/favicon.png">
@@ -59,10 +59,21 @@
       padding: 72px 40px 64px;
       display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
     }
+    .page-hero > div { min-width: 0; }
     .breadcrumb { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.3); margin-bottom: 24px; }
     .breadcrumb a { color: rgba(255,255,255,0.3); text-decoration: none; }
     h1.page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 8vw, 120px); line-height: 0.9; color: var(--white); }
-    h1.page-title .accent { color: var(--blue); }
+    h1.page-title .accent {
+      color: var(--blue); display: inline-flex; align-items: center; justify-content: center;
+      vertical-align: middle; line-height: 1;
+    }
+    h1.page-title .accent svg { width: clamp(40px, 11vw, 72px); height: clamp(40px, 11vw, 72px); flex-shrink: 0; }
+    .icon-arrow-right { display: inline-block; vertical-align: -0.2em; margin-left: 6px; }
+    .icon-arrow-right svg { display: block; }
+    .map-open-btn .icon-arrow-right,
+    .btn-visit .icon-arrow-right,
+    .btn-white .icon-arrow-right { margin-left: 0; }
+    .icon-arrow-external svg { display: block; width: 100%; height: 100%; }
     .hero-status { display: flex; align-items: center; gap: 10px; margin-top: 28px; }
     .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
@@ -97,7 +108,10 @@
     .channel-type { font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 6px; transition: color 0.2s; }
     .channel-value { font-family: 'Bebas Neue', sans-serif; font-size: 20px; margin-bottom: 8px; transition: color 0.2s; }
     .channel-desc { font-size: 12px; line-height: 1.55; color: #777; transition: color 0.2s; }
-    .channel-arrow { font-size: 18px; color: var(--blue); margin-top: 16px; transition: color 0.2s, transform 0.15s; display: block; }
+    .channel-arrow {
+      width: 20px; height: 20px; color: var(--blue); margin-top: 16px;
+      transition: color 0.2s, transform 0.15s; display: block; flex-shrink: 0;
+    }
     .channel-card:hover .channel-arrow { transform: translate(3px, -3px); }
 
     /* MAP + FORM */
@@ -262,7 +276,10 @@
     }
     @media (max-width: 480px) {
       .channels-grid { grid-template-columns: 1fr; }
-      h1.page-title { font-size: clamp(52px, 14vw, 88px); }
+      h1.page-title { font-size: clamp(44px, 12vw, 80px); line-height: 0.92; }
+      h1.page-title .accent svg { width: clamp(32px, 10vw, 52px); height: clamp(32px, 10vw, 52px); }
+      .page-hero { padding: 32px 18px 28px; }
+      .hero-lead { font-size: 16px; margin-bottom: 22px; }
       .btn-visit { max-width: 100%; white-space: normal; text-align: center; justify-content: center; line-height: 1.35; }
     }
   </style>
@@ -299,7 +316,7 @@
     <a href="/catalog">Каталог</a>
     <a href="/about">О фабрике</a>
     <a href="/contacts">Контакты</a>
-    <a href="/zayavka">Заявка →</a>
+    <a href="/zayavka">Заявка<span class="icon-arrow-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
   </div>
 </nav>
 
@@ -307,7 +324,10 @@
 <div class="page-hero">
   <div>
     <div class="breadcrumb"><a href="/">Главная</a> &nbsp;/&nbsp; Контакты</div>
-    <h1 class="page-title">КОН<span class="accent">✳</span><br>ТАКТЫ</h1>
+    <h1 class="page-title">
+      <span class="page-title-line">НАШИ <span class="accent"><svg viewBox="0 0 172 166" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M627.535 57.8959L654.235 28.1662L668.387 39.6703L643.556 67.3257L694.631 54.6644L696.685 73.5178L638.96 87.8287L675.722 117.848L661.576 133.543L620.909 100.342L610.792 165.243H591.039L598.472 117.521L575.64 142.936L561.488 131.432L589.675 100.053L524.332 116.229L522.277 97.3754L595.166 79.3037L542.302 36.1557L556.448 20.4476L607.152 61.8476L616.801 0H636.567L627.541 57.8959H627.529H627.535Z" transform="translate(-516, 0)"/></svg></span></span><br>
+      <span class="page-title-line">КОНТАКТЫ</span>
+    </h1>
     <div class="hero-status">
       <div class="status-dot"></div>
       <span class="status-text" id="contact-response-status">ОТВЕЧАЕМ В ТЕЧЕНИЕ 10 МИНУТ</span>
@@ -340,7 +360,7 @@
         <div class="channel-value">+7 (993) 245-60-42</div>
         <p class="channel-desc">Пн–Пт, 9:00–18:00. Ответим сразу.</p>
       </div>
-      <span class="channel-arrow">↗</span>
+      <span class="channel-arrow icon-arrow-external" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
     </a>
     <a href="#" class="channel-card" id="channel-email">
       <div>
@@ -349,7 +369,7 @@
         <div class="channel-value" id="channel-email-value">fabrika&#64;pnhd.ru</div>
         <p class="channel-desc">Коммерческие запросы и КП.</p>
       </div>
-      <span class="channel-arrow">↗</span>
+      <span class="channel-arrow icon-arrow-external" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
     </a>
     <a href="https://t.me/pnhd_opt" target="_blank" rel="noopener noreferrer" class="channel-card">
       <div>
@@ -358,7 +378,7 @@
         <div class="channel-value">@pnhd_opt</div>
         <p class="channel-desc">Быстро и удобно. Отвечаем в рабочее время.</p>
       </div>
-      <span class="channel-arrow">↗</span>
+      <span class="channel-arrow icon-arrow-external" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
     </a>
     <a href="https://vk.ru/pinheadspb" target="_blank" rel="noopener noreferrer" class="channel-card">
       <div>
@@ -367,7 +387,7 @@
         <div class="channel-value">pinheadspb</div>
         <p class="channel-desc">Новости и ответы в сообщениях сообщества.</p>
       </div>
-      <span class="channel-arrow">↗</span>
+      <span class="channel-arrow icon-arrow-external" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
     </a>
     <a href="https://max.ru/id7813212406_bot" target="_blank" rel="noopener noreferrer" class="channel-card">
       <div>
@@ -376,7 +396,7 @@
         <div class="channel-value">Бот в MAX</div>
         <p class="channel-desc">Пишите фото, размеры, референсы — обсудим детали.</p>
       </div>
-      <span class="channel-arrow">↗</span>
+      <span class="channel-arrow icon-arrow-external" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
     </a>
   </div>
 </section>
@@ -403,14 +423,14 @@
           Наб. Обводного канала, 24д<br>
           <span class="map-metro">~15 мин от м. Балтийская</span>
         </div>
-        <a href="https://yandex.ru/maps/?text=Наб.+Обводного+канала+24д+Санкт-Петербург" target="_blank" class="map-open-btn">Открыть в Яндекс.Картах →</a>
+        <a href="https://yandex.ru/maps/?text=Наб.+Обводного+канала+24д+Санкт-Петербург" target="_blank" class="map-open-btn">Открыть в Яндекс.Картах<span class="icon-arrow-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
       </div>
     </div>
 
     <div class="form-card">
       <div id="contactFormBody">
         <div class="form-title">НАПИШИТЕ НАМ</div>
-        <div class="form-subtitle" id="contact-form-status">✳ Ответим в течение 10 минут</div>
+        <div class="form-subtitle" id="contact-form-status">Ответим в течение 10 минут</div>
         <form id="contactForm">
           <div class="form-row">
             <div class="form-field">
@@ -446,7 +466,7 @@
             <label>Сообщение</label>
             <textarea name="contact-message" rows="4" placeholder="Опишите ваш запрос, изделие, тираж и сроки..."></textarea>
           </div>
-          <button type="submit" class="form-submit" id="contactSubmit">✳ Отправить сообщение</button>
+          <button type="submit" class="form-submit" id="contactSubmit">Отправить сообщение</button>
         </form>
       </div>
       <div id="contactFormSuccess" class="form-success" style="display: none;">
@@ -465,7 +485,7 @@
         <h2>ПРИЕЗЖАЙТЕ<br>НА ФАБРИКУ</h2>
         <p>У нас формат «открытой кухни» — вы можете приехать, посмотреть производство своими глазами, познакомиться с командой и обсудить проект на месте.</p>
       </div>
-      <a href="tel:+79932456042" class="btn-visit">Позвонить +7 (993) 245-60-42 →</a>
+      <a href="tel:+79932456042" class="btn-visit">Позвонить +7 (993) 245-60-42<span class="icon-arrow-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
     </div>
     <div class="visit-steps">
       <div class="visit-step">
@@ -522,7 +542,7 @@
     <h2>ГОТОВЫ ЗАПУСТИТЬ<br><span class="accent">ПРОИЗВОДСТВО?</span></h2>
     <p>Оставьте заявку — рассчитаем стоимость бесплатно.</p>
   </div>
-  <a href="/zayavka" class="btn-white">Оставить заявку →</a>
+  <a href="/zayavka" class="btn-white">Оставить заявку<span class="icon-arrow-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
 </div>
 
 <!-- FOOTER -->
@@ -563,8 +583,8 @@ function updateContactResponseTexts() {
   }
   if (formEl) {
     formEl.textContent = work
-      ? '✳ Ответим в течение 10 минут'
-      : '✳ Ответим в первый рабочий час';
+      ? 'Ответим в течение 10 минут'
+      : 'Ответим в первый рабочий час';
   }
   if (hoursVal) {
     hoursVal.textContent = work ? '10 МИН' : 'УТРОМ';
@@ -614,7 +634,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var message = document.querySelector('[name="contact-message"]').value.trim();
       var btn = document.getElementById('contactSubmit');
       btn.disabled = true;
-      btn.textContent = '✳ Отправляем...';
+      btn.textContent = 'Отправляем...';
 
       var BITRIX_WEBHOOK_URL = 'https://pinhead.bitrix24.ru/rest/8542/l7blfw71l634jzij/';
       var bitrixFields = {
