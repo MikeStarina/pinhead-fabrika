@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /zayavka
 
-Sitemap: https://fabric-pnhd-admin.ru/sitemap.xml
+Sitemap: https://pinhead-fabrika.ru/sitemap.xml
