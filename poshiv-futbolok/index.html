@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Пошив футболок на заказ в Санкт-Петербурге — ПИНХЭД ФАБРИКА</title>
-  <meta name="description" content="Контрактный пошив футболок для брендов в Санкт-Петербурге. Базовые, оверсайз, поло, лонгсливы. От 100 единиц, 7–21 день, полный цикл." />
+  <title>Пошив футболок оптом в СПб от 100 шт. — ПИНХЭД ФАБРИКА</title>
+  <meta name="description" content="Контрактное производство футболок для брендов и бизнеса в Санкт-Петербурге. Партии от 100 шт. из сырья заказчика. Рассчитайте стоимость пошива." />
   <link rel="canonical" href="https://pinhead-fabrika.ru/poshiv-futbolok/" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Пошив футболок на заказ","provider":{"@type":"Organization","name":"ПИНХЭД ФАБРИКА","address":{"@type":"PostalAddress","addressLocality":"Санкт-Петербург","addressCountry":"RU"}},"description":"Контрактный пошив футболок для брендов. От 100 единиц.","areaServed":"RU"}</script>
   <link rel="icon" href="/favicon.ico?v=20260409" sizes="any">
@@ -66,8 +66,9 @@
     .breadcrumb { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.3); margin-bottom: 24px; }
     .breadcrumb a { color: rgba(255,255,255,0.3); text-decoration: none; }
     .breadcrumb a:hover { color: rgba(255,255,255,0.6); }
-    h1.page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 7vw, 110px); line-height: 0.92; color: var(--white); }
+    h1.page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 7vw, 110px); line-height: 0.92; color: var(--white); text-transform: uppercase; }
     h1.page-title .accent { color: var(--blue); }
+    .hero-star { display: block; color: var(--blue); font-size: 28px; margin-bottom: 12px; }
     .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
     .tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); padding: 6px 14px; border-radius: 100px; }
     .tag-blue { background: rgba(29,25,234,0.25); color: #8884ff; }
@@ -182,6 +183,7 @@
       white-space: nowrap; transition: background 0.15s, transform 0.1s;
     }
     .btn-white:hover { background: var(--blue); color: var(--white); transform: translateY(-1px); }
+    .hero-cta { display: inline-flex; margin-top: 24px; }
 
     /* FOOTER */
     footer {
@@ -262,24 +264,25 @@
 <div class="page-hero">
   <div>
     <div class="breadcrumb"><a href="/">Главная</a> / <a href="/catalog">Каталог</a> / Пошив футболок</div>
-    <h1 class="page-title">ПОШИВ<br>ФУТ<span class="accent">✳</span>БОЛОК<br>НА ЗАКАЗ</h1>
+    <span class="hero-star" aria-hidden="true">✳</span>
+    <h1 class="page-title">Пошив футболок на заказ оптом<br>в Санкт-Петербурге</h1>
     <div class="hero-tags">
       <span class="tag tag-blue">✳ Санкт-Петербург</span>
-      <span class="tag">От 100 шт.</span>
-      <span class="tag">7–21 день</span>
+      <span class="tag">От 100 шт. на модель</span>
+      <span class="tag">Из сырья заказчика</span>
       <span class="tag">Оверсайз · Поло · Лонгслив</span>
     </div>
   </div>
   <div>
-    <p class="hero-lead">Производим футболки для российских брендов, маркетплейсов и корпоративного мерча. Базовые, оверсайз, поло, лонгсливы. Работаем с вашими лекалами или образцом.</p>
+    <p class="hero-lead">Производим футболки для российских брендов, маркетплейсов и корпоративного мерча. Базовые, оверсайз, поло, лонгсливы. Работаем из сырья заказчика — вы предоставляете ткань, нитки, фурнитуру и бирки, мы берём на себя весь производственный цикл по вашим лекалам или образцу.</p>
     <div class="hero-stats">
       <div class="hstat">
         <div class="hstat-val">100</div>
-        <div class="hstat-label">мин. тираж, шт.</div>
+        <div class="hstat-label">мин. тираж, шт. на 1 модель</div>
       </div>
       <div class="hstat">
         <div class="hstat-val">7–21</div>
-        <div class="hstat-label">дней производство</div>
+        <div class="hstat-label">дней с момента предоплаты</div>
       </div>
       <div class="hstat">
         <div class="hstat-val">160–220</div>
@@ -290,6 +293,7 @@
         <div class="hstat-label">размерный ряд</div>
       </div>
     </div>
+    <a href="/zayavka" class="btn-white hero-cta">Рассчитать стоимость партии →</a>
   </div>
 </div>
 
@@ -331,13 +335,23 @@
   </div>
 </section>
 
+<!--
+  TODO: блок "Стоимость пошива футболок оптом" — размещается здесь, сразу после блока моделей.
+  Не публикуется, пока производство не пришлёт реальные данные (цены не должны быть вымышленными):
+  - таблица расчётов: модель / тираж / материал / включённые работы / цена за изделие (2–4 примера)
+  - дата актуальности цен
+  - условие по НДС
+  - входит ли ткань в цену
+  - что входит в базовую стоимость пошива, что оплачивается отдельно
+-->
+
 <!-- SPECS -->
 <section class="section fade-up" style="padding-top: 0;">
   <div class="section-label">02 / Параметры</div>
   <h2 class="section-title">ТЕХНИЧЕСКИЕ <span class="accent">ХАРАКТЕРИСТИКИ</span></h2>
   <div class="specs-grid">
-    <div class="spec-row"><span class="spec-key">Минимальный тираж</span><span class="spec-val blue">от 100 шт.</span></div>
-    <div class="spec-row"><span class="spec-key">Срок производства</span><span class="spec-val blue">7–21 день</span></div>
+    <div class="spec-row"><span class="spec-key">Минимальный тираж</span><span class="spec-val blue">от 100 шт. на модель</span></div>
+    <div class="spec-row"><span class="spec-key">Срок производства</span><span class="spec-val blue">7–21 день с момента предоплаты</span></div>
     <div class="spec-row"><span class="spec-key">Плотность ткани</span><span class="spec-val">160–220 г/м²</span></div>
     <div class="spec-row"><span class="spec-key">Состав</span><span class="spec-val">Хлопок / Хлопок+ПЭ / Пике</span></div>
     <div class="spec-row"><span class="spec-key">Размерный ряд</span><span class="spec-val">XS — 5XL</span></div>
@@ -403,6 +417,20 @@
   </div>
 </section>
 
+<!--
+  TODO: блок "Фотографии изделий и производства" — размещается здесь.
+  Ожидаемые фото (пришлёте ссылки/файлы — вставлю как <picture> с WebP/AVIF,
+  width/height, loading="lazy" (кроме первого экрана) и содержательным alt):
+  - общий вид футболки (готовое изделие)
+  - деталь горловины крупным планом
+  - деталь шва крупным планом
+  - обработка низа изделия крупным планом
+  - бирка/этикетка крупным планом
+  - раскрой ткани в цеху
+  - процесс пошива на машине
+  - контроль качества (ОТК)
+-->
+
 <!-- SEO -->
 <section class="section fade-up" style="padding-top: 0;">
   <div class="seo-grid">
@@ -458,6 +486,16 @@
     </div>
   </div>
 </section>
+
+<!--
+  TODO: блок "Примеры выполненных заказов" — размещается здесь, до финального CTA.
+  На главной уже есть 2 реальных кейса с футболками (Bekitzer, Друг Теннис) —
+  переиспользовать их текст/фото, но не хватает тиража и фактического срока
+  производства по каждому — эти цифры нужно получить от производства.
+  Поля на карточку: задача заказчика, модель, материал, тираж, выполненные
+  работы, фактический срок, фотографии, ссылка на подробный кейс
+  (отдельных страниц кейсов пока нет — реализуется отдельной задачей).
+-->
 
 <!-- CTA -->
 <div class="cta-band fade-up">
