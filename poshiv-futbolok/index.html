@@ -152,6 +152,36 @@
     .faq-item.open .faq-a { max-height: 300px; }
     .faq-a-inner { padding: 0 0 24px; font-size: 15px; line-height: 1.8; color: #444; max-width: 700px; }
 
+    /* WORKS SCROLL */
+    .works-scroll-section { padding: 0 0 72px; }
+    .works-scroll-track {
+      display: flex; gap: 10px; overflow-x: auto;
+      padding: 0 40px 16px; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .works-scroll-track::-webkit-scrollbar { display: none; }
+    .works-scroll-item {
+      flex: 0 0 auto; width: 300px; height: 400px;
+      border-radius: var(--radius-lg); overflow: hidden; position: relative;
+      scroll-snap-align: start;
+    }
+    .works-scroll-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.4s ease;
+    }
+    .works-scroll-item:hover img { transform: scale(1.04); }
+    .works-scroll-caption {
+      position: absolute; left: 0; right: 0; bottom: 0; padding: 32px 18px 16px;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+      color: var(--white);
+    }
+    .works-scroll-brand { font-family: 'Bebas Neue', sans-serif; font-size: 20px; line-height: 1; }
+    .works-scroll-desc { font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.65); margin-top: 4px; }
+    @media (max-width: 768px) {
+      .works-scroll-track { padding: 0 20px 12px; gap: 8px; }
+      .works-scroll-item { width: 230px; height: 310px; }
+    }
+
     /* RELATED */
     .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .related-card {
@@ -347,6 +377,63 @@
   </div>
 </section>
 
+<!-- WORKS SCROLL -->
+<section class="works-scroll-section fade-up">
+  <div class="section-label" style="padding: 0 40px;">Наши работы</div>
+  <h2 class="section-title" style="padding: 0 40px;">ФУТБОЛКИ ДЛЯ <span class="accent">РЕАЛЬНЫХ БРЕНДОВ</span></h2>
+  <div class="works-scroll-track">
+    <div class="works-scroll-item">
+      <img src="Depo%20futbolka.jpg" alt="Boulevard Depo — футболка оверсайз с нанесением" loading="lazy">
+      <div class="works-scroll-caption">
+        <div class="works-scroll-brand">BOULEVARD DEPO</div>
+        <div class="works-scroll-desc">Футболка оверсайз с нанесением</div>
+      </div>
+    </div>
+    <div class="works-scroll-item">
+      <img src="Boulevard%20Depo%20longslive.jpg" alt="Boulevard Depo — лонгслив нестандартного кроя" loading="lazy">
+      <div class="works-scroll-caption">
+        <div class="works-scroll-brand">BOULEVARD DEPO</div>
+        <div class="works-scroll-desc">Лонгслив нестандартного кроя</div>
+      </div>
+    </div>
+    <div class="works-scroll-item">
+      <img src="Frank.png" alt="Frank — футболка оверсайз" loading="lazy">
+      <div class="works-scroll-caption">
+        <div class="works-scroll-brand">FRANK</div>
+        <div class="works-scroll-desc">Футболка оверсайз</div>
+      </div>
+    </div>
+    <div class="works-scroll-item">
+      <img src="Frank%20longslive.png" alt="Frank — лонгслив с пич-эффектом" loading="lazy">
+      <div class="works-scroll-caption">
+        <div class="works-scroll-brand">FRANK</div>
+        <div class="works-scroll-desc">Лонгслив с пич-эффектом</div>
+      </div>
+    </div>
+    <div class="works-scroll-item">
+      <img src="Spartak.png" alt="Spartak — футболка free-fit с нанесением" loading="lazy">
+      <div class="works-scroll-caption">
+        <div class="works-scroll-brand">SPARTAK</div>
+        <div class="works-scroll-desc">Футболка free-fit с нанесением</div>
+      </div>
+    </div>
+    <div class="works-scroll-item">
+      <img src="Joya.jpg" alt="Joya — футболка оверсайз с бирками и DTF-печатью" loading="lazy">
+      <div class="works-scroll-caption">
+        <div class="works-scroll-brand">JOYA</div>
+        <div class="works-scroll-desc">Оверсайз с бирками и DTF</div>
+      </div>
+    </div>
+    <div class="works-scroll-item">
+      <img src="Beauty%20inside.png" alt="Beauty Inside — футболка с вышивкой" loading="lazy">
+      <div class="works-scroll-caption">
+        <div class="works-scroll-brand">BEAUTY INSIDE</div>
+        <div class="works-scroll-desc">Футболка с вышивкой</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!--
   TODO: блок "Стоимость пошива футболок оптом" — размещается здесь, сразу после блока моделей.
   Не публикуется, пока производство не пришлёт реальные данные (цены не должны быть вымышленными):
@@ -500,10 +587,14 @@
 </section>
 
 <!--
-  TODO: блок "Примеры выполненных заказов" — размещается здесь, до финального CTA.
-  На главной уже есть 2 реальных кейса с футболками (Bekitzer, Друг Теннис) —
-  переиспользовать их текст/фото, но не хватает тиража и фактического срока
-  производства по каждому — эти цифры нужно получить от производства.
+  TODO: блок "Примеры выполненных заказов" (полноценные карточки кейсов) —
+  размещается здесь, до финального CTA.
+  Фото уже есть — на главной 2 кейса с футболками (Bekitzer, Друг Теннис),
+  плюс в разделе "Футболки для реальных брендов" выше на этой странице
+  (Boulevard Depo, Frank, Spartak, Joya, Beauty Inside). Не хватает по
+  каждому: тираж и фактический срок производства — нужно получить от
+  производства (задачу заказчика/материал/работы можно взять из описания
+  принта и типа изделия на фото, но лучше подтвердить у производства).
   Поля на карточку: задача заказчика, модель, материал, тираж, выполненные
   работы, фактический срок, фотографии, ссылка на подробный кейс
   (отдельных страниц кейсов пока нет — реализуется отдельной задачей).
