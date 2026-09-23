@@ -86,13 +86,13 @@
 
     /* TYPES */
     .types-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .type-card { background: var(--gray); border-radius: var(--radius); padding: 28px 24px; transition: background 0.2s, transform 0.2s; }
-    .type-card:hover { background: var(--black); transform: translateY(-3px); }
-    .type-card:hover .type-title { color: var(--white); }
-    .type-card:hover .type-desc { color: rgba(255,255,255,0.5); }
-    .type-icon { font-size: 28px; margin-bottom: 14px; }
-    .type-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; margin-bottom: 8px; transition: color 0.2s; }
-    .type-desc { font-size: 13px; line-height: 1.65; color: #555; transition: color 0.2s; }
+    .type-card { background: var(--gray); border-radius: var(--radius); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+    .type-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.12); }
+    .type-photo { aspect-ratio: 3 / 4; background: var(--gray-mid); overflow: hidden; }
+    .type-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .type-body { padding: 20px 24px 24px; }
+    .type-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; margin-bottom: 8px; }
+    .type-desc { font-size: 13px; line-height: 1.65; color: #555; }
 
     /* SPECS */
     .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -303,34 +303,46 @@
   <h2 class="section-title">КАКИЕ ФУТБОЛКИ <span class="accent">ШЬЁМ</span></h2>
   <div class="types-grid">
     <div class="type-card">
-      <div class="type-icon">👕</div>
-      <div class="type-title">БАЗОВАЯ ФУТБОЛКА</div>
-      <p class="type-desc">Классический крой, плотность 160–200 г/м². Унисекс и приталенный женский. Идеал для мерча, uniform и базовых коллекций.</p>
+      <div class="type-photo"><img src="baza.jpg" alt="Базовая футболка с накладным карманом, серый цвет" width="420" height="560" loading="lazy" decoding="async"></div>
+      <div class="type-body">
+        <div class="type-title">БАЗОВАЯ ФУТБОЛКА</div>
+        <p class="type-desc">Классический крой, плотность 160–200 г/м². Унисекс и приталенный женский. Идеал для мерча, uniform и базовых коллекций.</p>
+      </div>
     </div>
     <div class="type-card">
-      <div class="type-icon">📐</div>
-      <div class="type-title">ОВЕРСАЙЗ</div>
-      <p class="type-desc">Увеличенный силуэт, заниженная пройма, drop shoulder. Востребованный формат для streetwear и молодёжных брендов.</p>
+      <div class="type-photo"><img src="oversize.jpg" alt="Оверсайз футболка чёрного цвета с заниженной проймой" width="420" height="560" loading="lazy" decoding="async"></div>
+      <div class="type-body">
+        <div class="type-title">ОВЕРСАЙЗ</div>
+        <p class="type-desc">Увеличенный силуэт, заниженная пройма, drop shoulder. Востребованный формат для streetwear и молодёжных брендов.</p>
+      </div>
     </div>
     <div class="type-card">
-      <div class="type-icon">👔</div>
-      <div class="type-title">ПОЛО</div>
-      <p class="type-desc">Воротник с планкой, 2–3 пуговицы, пике или интерлок. Корпоративная форма, спортивная линейка, casual коллекции.</p>
+      <div class="type-photo"><img src="polo.jpg" alt="Чёрное поло с воротником на пуговицах и накладным карманом" width="420" height="560" loading="lazy" decoding="async"></div>
+      <div class="type-body">
+        <div class="type-title">ПОЛО</div>
+        <p class="type-desc">Воротник с планкой, 2–3 пуговицы, пике или интерлок. Корпоративная форма, спортивная линейка, casual коллекции.</p>
+      </div>
     </div>
     <div class="type-card">
-      <div class="type-icon">👕</div>
-      <div class="type-title">ЛОНГСЛИВ</div>
-      <p class="type-desc">Та же база, длинный рукав. Часто идёт в паре с футболкой в рамках одной коллекции. Кулирка или интерлок.</p>
+      <div class="type-photo"><img src="long.jpg" alt="Белый лонгслив с длинным рукавом" width="420" height="560" loading="lazy" decoding="async"></div>
+      <div class="type-body">
+        <div class="type-title">ЛОНГСЛИВ</div>
+        <p class="type-desc">Та же база, длинный рукав. Часто идёт в паре с футболкой в рамках одной коллекции. Кулирка или интерлок.</p>
+      </div>
     </div>
     <div class="type-card">
-      <div class="type-icon">🧒</div>
-      <div class="type-title">ДЕТСКИЕ</div>
-      <p class="type-desc">Усиленные швы, мягкие ткани, безопасная фурнитура. Пошив от размера 86. Гипоаллергенные материалы.</p>
+      <div class="type-photo"><img src="kids.jpg" alt="Детская футболка белого цвета" width="420" height="560" loading="lazy" decoding="async"></div>
+      <div class="type-body">
+        <div class="type-title">ДЕТСКИЕ</div>
+        <p class="type-desc">Усиленные швы, мягкие ткани, безопасная фурнитура. Пошив от размера 86. Гипоаллергенные материалы.</p>
+      </div>
     </div>
     <div class="type-card">
-      <div class="type-icon">✂️</div>
-      <div class="type-title">НЕСТАНДАРТНЫЙ КРОЙ</div>
-      <p class="type-desc">Асимметрия, разрезы, удлинение — работаем по вашим лекалам или образцу. Любые технические задания.</p>
+      <div class="type-photo"><img src="other.jpg" alt="Футболка нестандартного кроя с асимметричными швами" width="420" height="560" loading="lazy" decoding="async"></div>
+      <div class="type-body">
+        <div class="type-title">НЕСТАНДАРТНЫЙ КРОЙ</div>
+        <p class="type-desc">Асимметрия, разрезы, удлинение — работаем по вашим лекалам или образцу. Любые технические задания.</p>
+      </div>
     </div>
   </div>
 </section>
