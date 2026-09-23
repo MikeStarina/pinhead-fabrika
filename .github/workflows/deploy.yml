@@ -28,9 +28,12 @@ jobs:
             **/*.json
             **/*.png
             **/*.jpg
+            **/*.webp
+            **/*.avif
             **/*.svg
             **/*.ico
             **/*.txt
+            **/*.xml
           exclude: |
             .git/**
             .github/**
