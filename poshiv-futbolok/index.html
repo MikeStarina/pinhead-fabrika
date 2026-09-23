@@ -158,8 +158,10 @@
       display: flex; gap: 10px; overflow-x: auto;
       padding: 0 40px 16px; scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      cursor: grab; user-select: none;
     }
     .works-scroll-track::-webkit-scrollbar { display: none; }
+    .works-scroll-track.dragging { cursor: grabbing; scroll-snap-type: none; }
     .works-scroll-item {
       flex: 0 0 auto; width: 300px; height: 400px;
       border-radius: var(--radius-lg); overflow: hidden; position: relative;
@@ -380,8 +382,8 @@
 <!-- WORKS SCROLL -->
 <section class="works-scroll-section fade-up">
   <div class="section-label" style="padding: 0 40px;">Наши работы</div>
-  <h2 class="section-title" style="padding: 0 40px;">ФУТБОЛКИ ДЛЯ <span class="accent">РЕАЛЬНЫХ БРЕНДОВ</span></h2>
-  <div class="works-scroll-track">
+  <h2 class="section-title" style="padding: 0 40px;">ПРИМЕРЫ <span class="accent">НАШИХ РАБОТ</span></h2>
+  <div class="works-scroll-track" id="works-scroll-track">
     <div class="works-scroll-item">
       <img src="Depo%20futbolka.jpg" alt="Boulevard Depo — футболка оверсайз с нанесением" loading="lazy">
       <div class="works-scroll-caption">
@@ -664,6 +666,31 @@ document.addEventListener('DOMContentLoaded', function() {
   var mobileNav = document.getElementById('mobile-nav');
   if (burger && mobileNav) {
     burger.addEventListener('click', function() { mobileNav.classList.toggle('open'); });
+  }
+
+  var worksTrack = document.getElementById('works-scroll-track');
+  if (worksTrack) {
+    worksTrack.addEventListener('wheel', function(e) {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        worksTrack.scrollLeft += e.deltaY;
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    var isDown = false, startX = 0, startScroll = 0, dragged = false;
+    worksTrack.addEventListener('mousedown', function(e) {
+      isDown = true; dragged = false;
+      startX = e.pageX; startScroll = worksTrack.scrollLeft;
+      worksTrack.classList.add('dragging');
+    });
+    window.addEventListener('mouseup', function() { isDown = false; worksTrack.classList.remove('dragging'); });
+    window.addEventListener('mousemove', function(e) {
+      if (!isDown) return;
+      var delta = e.pageX - startX;
+      if (Math.abs(delta) > 4) dragged = true;
+      worksTrack.scrollLeft = startScroll - delta;
+    });
+    worksTrack.addEventListener('click', function(e) { if (dragged) { e.preventDefault(); e.stopPropagation(); } }, true);
   }
 });
 </script>
